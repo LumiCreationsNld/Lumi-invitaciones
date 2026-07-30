@@ -1,0 +1,1642 @@
+/*======================================
+    GABBY'S DOLLHOUSE INVITACIÓN V2.0
+======================================*/
+
+
+/*======================================
+    RESET
+======================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+:root{
+
+    --rosa:#ff78c8;
+    --lila:#9b7bff;
+    --menta:#9ff5dd;
+    --blanco:#ffffff;
+    --sombra:rgba(0,0,0,.25);
+
+}
+
+
+/*======================================
+    BODY
+======================================*/
+
+body{
+
+    width:100%;
+    height:100vh;
+
+    overflow:hidden;
+
+    font-family:
+    "Arial Rounded MT Bold",
+    Arial,
+    sans-serif;
+
+    background:#f9ddff;
+
+}
+
+
+
+/*======================================
+    FONDO HABITACIÓN MÁGICA
+======================================*/
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    background-image:
+
+    linear-gradient(
+    rgba(255,255,255,.15),
+    rgba(255,255,255,.15)
+    ),
+
+    url("../assets/backgrounds/habitacion-magica.png");
+
+
+    background-size:cover;
+
+    background-position:center;
+
+    z-index:-3;
+
+
+    animation:
+
+    movimientoFondo
+    25s
+    ease-in-out
+    infinite
+    alternate;
+
+}
+
+
+
+@keyframes movimientoFondo{
+
+from{
+
+background-size:100%;
+
+}
+
+
+to{
+
+background-size:108%;
+
+}
+
+}
+
+
+
+/*======================================
+    DESTELLOS
+======================================*/
+
+
+.sparkles{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+
+    background-image:
+
+    radial-gradient(
+    white 1.5px,
+    transparent 2px
+    );
+
+
+    background-size:
+    80px 80px;
+
+
+    opacity:.45;
+
+
+    animation:
+
+    brillos
+    12s
+    linear
+    infinite;
+
+
+    z-index:-2;
+
+}
+
+
+
+@keyframes brillos{
+
+from{
+
+background-position:
+0 0;
+
+}
+
+
+to{
+
+background-position:
+80px 80px;
+
+}
+
+}
+
+
+
+/*======================================
+    INTRO
+======================================*/
+
+
+#intro{
+
+    position:fixed;
+
+    inset:0;
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    background:
+
+    linear-gradient(
+    rgba(255,180,225,.65),
+    rgba(160,130,255,.65)
+    );
+
+
+    backdrop-filter:blur(8px);
+
+
+    z-index:999;
+
+
+    transition:
+
+    opacity .8s ease;
+
+}
+
+
+
+
+.logoIntro{
+
+    width:190px;
+
+
+    animation:
+
+    logoFlota
+    3s
+    ease-in-out
+    infinite;
+
+
+}
+
+
+
+@keyframes logoFlota{
+
+0%,100%{
+
+transform:
+translateY(0);
+
+}
+
+
+50%{
+
+transform:
+translateY(-12px);
+
+}
+
+}
+
+
+
+
+#intro h1{
+
+
+    margin-top:25px;
+
+
+    color:white;
+
+
+    font-size:38px;
+
+
+    text-align:center;
+
+
+    text-shadow:
+
+    0 5px 15px rgba(0,0,0,.25);
+
+}
+
+
+
+
+#intro p{
+
+
+    margin-top:12px;
+
+
+    color:white;
+
+
+    font-size:20px;
+
+}
+
+
+
+
+#abrirInvitacion{
+
+
+    margin-top:35px;
+
+
+    padding:
+
+    18px 45px;
+
+
+    border:none;
+
+
+    border-radius:50px;
+
+
+    cursor:pointer;
+
+
+    color:white;
+
+
+    font-size:22px;
+
+
+    background:
+
+    linear-gradient(
+    90deg,
+    var(--rosa),
+    var(--lila)
+    );
+
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.25);
+
+
+    animation:
+
+    botonPulso
+    2s
+    infinite;
+
+}
+
+
+
+
+@keyframes botonPulso{
+
+
+0%,100%{
+
+transform:scale(1);
+
+}
+
+
+50%{
+
+transform:scale(1.06);
+
+}
+
+}
+
+
+
+/*======================================
+    TARJETA
+======================================*/
+
+
+.invitation{
+
+
+    width:100vw;
+
+    height:100vh;
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+}
+
+
+
+.card{
+
+
+    position:relative;
+
+
+    width:min(94vw,460px);
+
+
+    aspect-ratio:9/16;
+
+    max-height:95vh;
+
+
+    opacity:0;
+
+    transform:
+    scale(.75)
+    rotate(-4deg);
+
+    transform-origin:center;
+
+    transition:none;
+
+
+    filter:
+
+    drop-shadow(
+    0 25px 35px rgba(0,0,0,.25)
+    );
+
+    backdrop-filter:
+
+    blur(1px);
+
+
+}
+
+
+
+/*======================================
+    MARCO
+======================================*/
+
+
+.marco{
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    width:100%;
+
+
+    height:100%;
+
+
+    object-fit:contain;
+
+
+    z-index:1;
+
+
+    animation:
+
+    tarjetaFlota
+    5s
+    ease-in-out
+    infinite;
+
+    filter:
+
+    drop-shadow(
+    0 20px 30px rgba(0,0,0,.18)
+    );
+
+
+}
+
+
+
+@keyframes tarjetaFlota{
+
+
+0%,100%{
+
+transform:
+translateY(0);
+
+}
+
+
+50%{
+
+transform:
+translateY(-10px);
+
+}
+
+
+}
+
+
+
+/*======================================
+    CONTENIDO
+======================================*/
+
+
+.contenido{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:2;
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    grid-template-rows:
+
+        11%   /* Nombre */
+
+        8%    /* Edad */
+
+        10%   /* Fecha */
+
+        9%    /* Hora */
+
+        9%    /* Lugar */
+
+        10%   /* Dirección */
+
+        9%    /* Aviso */
+
+        12%   /* Contador */
+
+        12%   /* Gabby */
+
+        10%;  /* Botones */
+
+    justify-items:center;
+
+    align-items:center;
+
+}
+
+/*======================================
+    ELEMENTOS DE LA INVITACIÓN
+======================================*/
+
+
+.nombre,
+.edad,
+.fecha,
+.hora,
+.lugar,
+.direccion,
+.aviso,
+.gabby{
+
+    position:absolute;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    opacity:0;
+
+}
+
+
+
+/*======================================
+    NOMBRE
+======================================*/
+
+
+.nombre{
+
+    width:58%;
+
+    justify-self:center;
+
+    align-self:center;
+
+}
+
+
+
+/*======================================
+    EDAD
+======================================*/
+
+
+.edad{
+
+    width:28%;
+
+}
+
+
+
+/*======================================
+    INFORMACIÓN
+======================================*/
+
+
+.fecha{
+
+    width:64%;
+
+}
+
+
+
+.hora{
+
+    width:55%;
+
+}
+
+
+
+.lugar{
+
+    width:67%;
+
+}
+
+
+
+.direccion{
+
+    width:74%;
+
+}
+
+
+
+.aviso{
+
+    width:60%;
+
+}
+
+
+
+/*======================================
+    GABBY
+======================================*/
+
+
+.gabby{
+
+    width:42%;
+
+    align-self:end;
+
+}
+
+
+
+/*======================================
+    ANIMACIONES DE ENTRADA
+======================================*/
+
+
+@keyframes aparecerElemento{
+
+
+0%{
+
+opacity:0;
+
+transform:
+
+translate(-50%,40px)
+
+scale(.8);
+
+}
+
+
+100%{
+
+opacity:1;
+
+transform:
+
+translate(-50%,0)
+
+scale(1);
+
+}
+
+
+}
+
+
+
+
+@keyframes entradaGabby{
+
+
+0%{
+
+opacity:0;
+
+transform:
+
+translate(-50%,120px)
+
+scale(.5);
+
+}
+
+
+70%{
+
+opacity:1;
+
+transform:
+
+translate(-50%,-15px)
+
+scale(1.05);
+
+}
+
+
+100%{
+
+opacity:1;
+
+transform:
+
+translate(-50%,0)
+
+scale(1);
+
+}
+
+
+}
+
+
+
+
+/* Secuencia */
+
+
+.card.mostrar .nombre{
+
+animation:
+
+aparecerElemento
+.8s
+ease
+forwards;
+
+}
+
+
+
+.card.mostrar .edad{
+
+animation:
+
+aparecerElemento
+.8s
+.3s
+ease
+forwards;
+
+}
+
+
+
+.card.mostrar .fecha{
+
+animation:
+
+aparecerElemento
+.8s
+.6s
+ease
+forwards;
+
+}
+
+
+
+.card.mostrar .hora{
+
+animation:
+
+aparecerElemento
+.8s
+.9s
+ease
+forwards;
+
+}
+
+
+
+.card.mostrar .lugar{
+
+animation:
+
+aparecerElemento
+.8s
+1.2s
+ease
+forwards;
+
+}
+
+
+
+.card.mostrar .direccion{
+
+animation:
+
+aparecerElemento
+.8s
+1.5s
+ease
+forwards;
+
+}
+
+
+
+.card.mostrar .aviso{
+
+animation:
+
+aparecerElemento
+.8s
+1.8s
+ease
+forwards;
+
+}
+
+
+
+.card.mostrar .gabby{
+
+
+animation:
+
+entradaGabby
+1s
+2.1s
+ease
+forwards;
+
+
+}
+
+
+/*======================================
+    GABBY MOVIMIENTO CONTINUO
+======================================*/
+
+
+.card.mostrar .gabby{
+
+animation:
+
+entradaGabby
+1s
+2.1s
+ease
+forwards,
+gabbyFlota
+4s
+3.2s
+ease-in-out
+infinite;
+
+}
+
+
+
+
+@keyframes gabbyFlota{
+
+0%,100%{
+
+transform:
+translate(-50%,0)
+rotate(0deg);
+
+}
+
+
+50%{
+
+transform:
+translate(-50%,-12px)
+rotate(2deg);
+
+}
+
+}
+
+
+
+
+/*======================================
+    CONTADOR V2 CRISTAL
+======================================*/
+
+
+.contador{
+
+    position:absolute;
+
+    left:50%;
+
+    top:72%;
+
+    transform:translateX(-50%);
+
+    display:flex;
+
+    gap:10px;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+.card .contador{
+
+
+animation:
+
+aparecerElemento
+.8s
+2.4s
+ease
+forwards;
+
+
+}
+
+
+
+.tiempo{
+
+    width:56px;
+
+    height:64px;
+
+    border-radius:22px;
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    color:white;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        rgba(255,120,200,.75),
+        rgba(155,123,255,.75)
+    );
+
+
+    backdrop-filter:blur(10px);
+
+
+    border:
+
+    2px solid rgba(255,255,255,.65);
+
+
+    box-shadow:
+
+    0 8px 20px rgba(139,92,246,.35);
+
+
+}
+
+
+.tiempo span{
+
+    font-size:25px;
+
+    font-weight:bold;
+
+
+    text-shadow:
+
+    0 3px 8px rgba(0,0,0,.25);
+
+}
+
+
+.tiempo small{
+
+    font-size:11px;
+
+    opacity:.95;
+
+}
+
+
+
+
+.tiempo span{
+
+
+    font-size:24px;
+
+    font-weight:bold;
+
+}
+
+
+
+
+.tiempo small{
+
+
+    font-size:10px;
+
+}
+
+
+
+/*======================================
+    PANEL BOTONES
+======================================*/
+
+
+.panelBotones{
+
+    width:88%;
+
+    justify-self:center;
+
+    align-self:end;
+
+    position:relative;
+
+    transform:none;
+
+}
+
+
+
+
+.panelBotones.mostrar{
+
+
+opacity:1;
+
+
+transform:
+
+translateX(-50%,0)
+
+translateY(0);
+
+
+}
+
+
+
+
+
+.btnImg{
+
+width:230px;
+
+filter:
+
+drop-shadow(
+0 6px 10px rgba(0,0,0,.2)
+);
+
+}
+
+
+
+
+.btnImg:hover{
+
+
+transform:
+
+scale(1.08);
+
+
+filter:
+
+drop-shadow(
+0 8px 15px rgba(0,0,0,.25)
+);
+
+
+}
+
+
+
+
+.btnImg:active{
+
+
+transform:
+
+scale(.95);
+
+
+}
+
+/*======================================
+    BOTÓN DE MÚSICA V2
+======================================*/
+
+
+.btnMusica{
+
+
+    position:fixed;
+
+
+    top:20px;
+
+
+    right:20px;
+
+
+    width:58px;
+
+
+    height:58px;
+
+
+
+    border:none;
+
+
+    border-radius:50%;
+
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+
+    font-size:26px;
+
+
+
+    color:white;
+
+
+
+    cursor:pointer;
+
+
+
+    background:
+
+
+    linear-gradient(
+    135deg,
+    #ff78c8,
+    #9b7bff
+    );
+
+    box-shadow:
+
+    0 8px 20px rgba(155,123,255,.45);
+
+
+
+    backdrop-filter:
+
+    blur(12px);
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.45);
+
+
+
+    box-shadow:
+
+    0 8px 20px rgba(0,0,0,.2);
+
+
+
+    z-index:9999;
+
+
+
+    animation:
+
+    musicaFlota
+    3s
+    ease-in-out
+    infinite;
+
+
+
+    transition:.3s ease;
+
+}
+
+
+
+
+.btnMusica:hover{
+
+
+    transform:
+
+    scale(1.1)
+
+    rotate(8deg);
+
+
+}
+
+
+
+
+.btnMusica:active{
+
+
+    transform:
+
+    scale(.9);
+
+
+}
+
+
+
+
+@keyframes musicaFlota{
+
+
+0%,100%{
+
+
+transform:
+
+translateY(0);
+
+
+}
+
+
+50%{
+
+
+transform:
+
+translateY(-8px);
+
+
+}
+
+
+}
+
+
+
+
+/*======================================
+    DESTELLOS ADICIONALES
+======================================*/
+
+
+.sparkles::before,
+.sparkles::after{
+
+
+content:"";
+
+
+position:absolute;
+
+
+border-radius:50%;
+
+
+
+background:white;
+
+
+
+opacity:.7;
+
+
+
+animation:
+
+flotarParticula
+8s
+linear
+infinite;
+
+
+}
+
+
+
+.sparkles::before{
+
+
+width:8px;
+
+height:8px;
+
+
+top:25%;
+
+left:15%;
+
+
+}
+
+
+
+.sparkles::after{
+
+
+width:5px;
+
+height:5px;
+
+
+top:70%;
+
+right:18%;
+
+
+animation-delay:3s;
+
+
+}
+
+
+
+@keyframes flotarParticula{
+
+
+0%{
+
+
+transform:
+
+translateY(0)
+
+scale(1);
+
+
+opacity:.3;
+
+
+}
+
+
+50%{
+
+
+transform:
+
+translateY(-80px)
+
+scale(1.5);
+
+
+opacity:1;
+
+
+}
+
+
+100%{
+
+
+transform:
+
+translateY(-160px)
+
+scale(.5);
+
+
+opacity:0;
+
+
+}
+
+
+}
+
+
+
+
+/*======================================
+    EFECTO AL ABRIR
+======================================*/
+
+
+#intro.ocultar{
+
+
+opacity:0;
+
+
+pointer-events:none;
+
+
+}
+
+
+
+
+/*======================================
+    RESPONSIVE MÓVIL
+======================================*/
+
+
+@media(max-width:380px){
+
+
+
+.card{
+
+
+width:95vw;
+
+
+}
+
+
+
+.nombre{
+
+
+width:220px;
+
+
+}
+
+
+
+.edad{
+
+
+width:100px;
+
+
+}
+
+
+
+.fecha,
+.hora{
+
+
+width:190px;
+
+
+}
+
+
+
+.lugar,
+.direccion{
+
+
+width:220px;
+
+
+}
+
+
+
+.aviso{
+
+
+width:190px;
+
+
+}
+
+
+
+.gabby{
+
+
+width:150px;
+
+
+bottom:14%;
+
+
+}
+
+
+
+.contador{
+
+
+top:70%;
+
+
+gap:5px;
+
+
+}
+
+
+
+.tiempo{
+
+
+width:52px;
+
+
+height:58px;
+
+
+}
+
+
+
+.tiempo span{
+
+
+font-size:20px;
+
+
+}
+
+
+
+
+.panelBotones{
+
+
+bottom:2%;
+
+
+padding:10px;
+
+
+}
+
+
+
+.btnImg{
+
+
+width:190px;
+
+
+}
+
+
+
+}
+
+
+
+
+/*======================================
+    TABLET / PANTALLAS GRANDES
+======================================*/
+
+
+@media(min-width:768px){
+
+
+
+.card{
+
+
+width:420px;
+
+
+}
+
+
+
+}
+
+
+/*======================================
+    MOVIMIENTO SUAVE GENERAL
+======================================*/
+
+
+img{
+
+
+-webkit-user-drag:none;
+
+
+user-select:none;
+
+
+}
+
+
+
+
+button,
+a{
+
+
+-webkit-tap-highlight-color:transparent;
+
+
+}
+

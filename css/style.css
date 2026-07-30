@@ -1,0 +1,289 @@
+/*==================================================
+    LUMI INVITATIONS FRAMEWORK
+    BASE STYLE
+==================================================*/
+
+
+/*======================================
+    RESET
+======================================*/
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+
+/*======================================
+    ROOT
+======================================*/
+
+:root{
+
+    --transition:.35s ease;
+
+}
+
+
+/*======================================
+    BODY
+======================================*/
+
+html,
+body{
+
+    width:100%;
+    min-height:100%;
+    overflow-x:hidden;
+
+}
+
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:#ffffff;
+
+    color:#444;
+
+}
+
+
+/*======================================
+    IMAGES
+======================================*/
+
+img{
+
+    display:block;
+
+    max-width:100%;
+
+}
+
+
+/*======================================
+    BUTTONS
+======================================*/
+
+button{
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+}
+
+
+/*======================================
+    LINKS
+======================================*/
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+
+/*======================================
+    HIDDEN
+======================================*/
+
+[hidden]{
+
+    display:none !important;
+
+}
+
+
+/*======================================
+    MAIN CONTENT
+======================================*/
+
+#content{
+
+    position:relative;
+
+    width:100%;
+
+    min-height:100vh;
+
+}
+
+
+/*======================================
+    TEMPLATE CLASS
+======================================*/
+
+.template-classic{
+
+    width:100%;
+
+}
+
+
+/*======================================
+    COMPONENTS
+======================================*/
+
+.lumi-component{
+
+    position:relative;
+
+}
+
+
+/*======================================
+    ANIMATIONS
+======================================*/
+
+.fade{
+
+    animation:lumiFade .8s ease forwards;
+
+}
+
+.zoom{
+
+    animation:lumiZoom .6s ease forwards;
+
+}
+
+.float{
+
+    animation:lumiFloat 3s ease-in-out infinite;
+
+}
+
+
+/*======================================
+    KEYFRAMES
+======================================*/
+
+@keyframes lumiFade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+@keyframes lumiZoom{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.9);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+@keyframes lumiFloat{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-10px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*======================================
+    TEMPLATE CAPABILITIES
+======================================*/
+
+.lumi-has-background{
+
+    position:relative;
+
+}
+
+.lumi-has-frame{
+
+    isolation:isolate;
+
+}
+
+.lumi-has-shadows{
+
+    --lumi-shadow:
+        0 12px 30px rgba(0, 0, 0, .16);
+
+}
+
+
+/*======================================
+    TEMPLATE DATA OPTIONS
+======================================*/
+
+[data-orientation="vertical"]{
+
+    flex-direction:column;
+
+}
+
+[data-orientation="horizontal"]{
+
+    flex-direction:row;
+
+}
+
+[data-width="mobile"]{
+
+    width:min(100%, 480px);
+
+    margin-inline:auto;
+
+}
+
+[data-width="tablet"]{
+
+    width:min(100%, 768px);
+
+    margin-inline:auto;
+
+}
+
+[data-width="full"]{
+
+    width:100%;
+
+}

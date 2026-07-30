@@ -1,0 +1,120 @@
+/*======================================
+    LUMI INVITATIONS FRAMEWORK V3.2
+    VARIABLES.CSS
+======================================*/
+
+:root{
+
+   /*======================================
+        COLORES GENERALES
+    ======================================*/
+
+    --color-primary:#8b5cf6;
+    --color-secondary:#ff5db1;
+    --color-accent:#67d8ff;
+
+    /*======================================
+        HEADER
+    ======================================*/
+
+     --guest-name-color:#FFFFFF;
+     --guest-name-stroke:#9605b3;
+     --guest-name-stroke-width:3px;
+
+    --guest-age-color:#FF5DB1;
+
+    /*======================================
+        BOTONES
+    ======================================*/
+
+    --button-text:#FFFFFF;
+    --button-shadow:rgba(0,0,0,.25);
+
+    --color-text:#444444;
+    --color-white:#ffffff;
+    --color-dark:#222222;
+
+    --color-glass:rgba(255,255,255,.35);
+    --color-glass-strong:rgba(255,255,255,.65);
+
+    /* TAMAÑOS */
+
+    --invitation-max-width:430px;
+    --content-max-width:390px;
+
+    /* ESPACIADO */
+
+    --space-xs:.4rem;
+    --space-sm:.75rem;
+    --space-md:1rem;
+    --space-lg:1.5rem;
+    --space-xl:2rem;
+
+    /* BORDES */
+
+    --radius-sm:12px;
+    --radius-md:20px;
+    --radius-lg:30px;
+    --radius-pill:999px;
+
+    /* SOMBRAS */
+
+    --shadow-soft:
+        0 8px 25px rgba(70,30,100,.15);
+
+    --shadow-card:
+        0 15px 40px rgba(70,30,100,.22);
+
+    --shadow-button:
+        0 8px 20px rgba(139,92,246,.28);
+
+    /* ANIMACIONES */
+
+    --transition-fast:.25s ease;
+    --transition-normal:.5s ease;
+    --transition-slow:.8s ease;
+
+    :root{
+
+    /* TARJETAS */
+
+    --card-radius:28px;
+
+    --card-background:
+        rgba(255,255,255,.18);
+
+    --card-border:
+        rgba(255,255,255,.38);
+
+    --card-shadow:
+        0 18px 42px
+        rgba(67,35,95,.20);
+
+    --card-blur:16px;
+
+    --card-padding:24px;
+
+
+    /* ANIMACIONES */
+
+    --animation-entry-duration:
+        900ms;
+
+    --animation-fast-duration:
+        350ms;
+
+    --animation-button-delay:
+        120ms;
+
+    --animation-offset:
+        28px;
+
+    --animation-start-scale:
+        .96;
+
+    --animation-easing:
+        cubic-bezier(.22,1,.36,1);
+
+    }
+
+}
