@@ -4,10 +4,10 @@
 
 @font-face{
 
-    font-family:"Baloo2";
+    font-family:"Futurino";
 
     src:
-        url("../assets/fonts/Baloo2-Regular.ttf")
+        url("../assets/fonts/Futurino.ttf")
         format("truetype");
 
     font-weight:400;
@@ -18,10 +18,10 @@
 
 @font-face{
 
-    font-family:"Baloo2";
+    font-family:"Futurino";
 
     src:
-        url("../assets/fonts/Baloo2-Bold.ttf")
+        url("../assets/fonts/Futurino.ttf")
         format("truetype");
 
     font-weight:700;
