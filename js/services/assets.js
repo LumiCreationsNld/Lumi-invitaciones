@@ -7,20 +7,6 @@ Lumi.register("Assets", {
     return `${this.themePath()}/${name}`;
   },
 
-  withTimeout(promise, timeout = 3500) {
-    return Promise.race([
-      promise,
-      new Promise((_, reject) => {
-        window.setTimeout(
-          () => reject(
-            new Error(`Tiempo de carga agotado: ${timeout} ms`)
-          ),
-          timeout
-        );
-      })
-    ]);
-  },
-
   preloadImage(src) {
     return new Promise((resolve, reject) => {
       const image = new Image();
@@ -49,38 +35,31 @@ Lumi.register("Assets", {
     if (!document.fonts) return;
 
     await Promise.allSettled([
-      this.withTimeout(document.fonts.load('1em "Futurino"'), 2500),
-      this.withTimeout(document.fonts.load('1em "Fredoka"'), 2500),
-      this.withTimeout(document.fonts.load('1em "Poppins"'), 2500)
+      document.fonts.load('1em "Futurino"'),
+      document.fonts.load('1em "Fredoka"'),
+      document.fonts.load('1em "Poppins"'),
+      document.fonts.ready
     ]);
   },
 
   async preloadCritical() {
-    await Promise.allSettled([
-      this.withTimeout(
-        this.preloadImage(this.image("background.png")),
-        4000
-      ),
-      this.waitForFonts()
-    ]);
+    const sources = [
+      this.image("background.png"),
+      this.image("logo.png"),
+      this.image("character.png")
+    ];
 
-    Promise.allSettled([
-      this.withTimeout(
-        this.preloadImage(this.image("logo.png")),
-        5000
-      ),
-      this.withTimeout(
-        this.preloadImage(this.image("character.png")),
-        7000
-      ),
-      this.withTimeout(
-        this.loadThemeFavicon(),
-        3500
-      )
-    ]).then(results => {
-      results
-        .filter(result => result.status === "rejected")
-        .forEach(result => console.warn(result.reason?.message));
-    });
+    const results = await Promise.allSettled(
+      sources.map(source => this.preloadImage(source))
+    );
+
+    results
+      .filter(result => result.status === "rejected")
+      .forEach(result => console.warn(result.reason.message));
+
+    await Promise.all([
+      this.waitForFonts(),
+      this.loadThemeFavicon()
+    ]);
   }
 });

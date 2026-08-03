@@ -17,7 +17,7 @@ Lumi.Registry.register("character", () => {
 
       <img
         class="characterImage"
-        src="${Lumi.Assets.image("character.png")}" loading="lazy" decoding="async"
+        src="${Lumi.Assets.image("character.png")}"
         alt="Personaje del tema ${themeName}"
         decoding="async"
       >

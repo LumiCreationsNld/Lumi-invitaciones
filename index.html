@@ -25,9 +25,24 @@
   <link rel="icon" type="image/png" href="https://lumicreationsnld.github.io/Lumi-invitaciones/assets/branding/favicon.png">
   <link rel="apple-touch-icon" href="https://lumicreationsnld.github.io/Lumi-invitaciones/assets/branding/apple-touch-icon.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Google Fonts no bloqueantes: la invitación se muestra con
+       fuentes de respaldo aunque la red móvil no alcance Google. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@400;500;600;700;800&family=Cookie&display=swap" rel="stylesheet">
+
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@400;500;600;700;800&family=Cookie&display=swap"
+    media="print"
+    onload="this.media='all'"
+  >
+
+  <noscript>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@400;500;600;700;800&family=Cookie&display=swap"
+    >
+  </noscript>
 
   <link rel="stylesheet" href="css/base/tokens.css">
   <link rel="stylesheet" href="css/base/typography.css">
@@ -45,6 +60,18 @@
   <link rel="stylesheet" href="css/components/lumi-magic.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/responsive.css">
+
+  <style id="lumi-mobile-safety">
+    html, body {
+      min-height: 100%;
+      background: #dcd2ff;
+    }
+
+    #intro {
+      visibility: visible;
+    }
+  </style>
+
 </head>
 <body>
   <div id="background" aria-hidden="true">

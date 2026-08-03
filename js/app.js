@@ -9,13 +9,16 @@ Lumi.register("App", {
       Lumi.Audio.init();
       Lumi.Magic.init();
 
-      /* La interfaz no debe esperar a la red. */
+      /*
+        La Intro debe funcionar aunque una fuente o imagen tarde.
+        La precarga continúa en segundo plano y nunca bloquea el botón.
+      */
       this.bindIntro();
 
       Lumi.Assets.preloadCritical()
         .catch(error => {
           console.warn(
-            "Algunos recursos continúan cargando en segundo plano.",
+            "La invitación continúa mientras terminan de cargar recursos.",
             error
           );
         });
