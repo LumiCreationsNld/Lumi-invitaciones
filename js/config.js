@@ -21,7 +21,7 @@ const invitationConfig = Object.freeze({
     { key: "time", title: "Hora", icon: "🕒", value: "4:00 PM" },
     { key: "place", title: "Lugar", icon: "📍", value: "Quinta la Esperanza" },
     { key: "address", title: "Dirección", icon: "🏠", value: "Calle La Esperanza, Col. Unión del Recuerdo" },
-    { key: "notice", title: "Aviso", icon: "🎉", value: "Fotografías de 4:30 a 5:00.", featured: true }
+    { key: "notice", title: "Aviso", icon: "🎉", value: "Ceremonia y Fotografías\n4:30 a 5:00.\n\n¡¡No olvides tu traje de baño!!", featured: true }
   ],
   buttons: [
     { text: "Confirmar asistencia", description: "Responder por WhatsApp", icon: "💬", action: "whatsapp", color: "rosa" },

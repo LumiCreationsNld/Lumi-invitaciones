@@ -265,6 +265,8 @@
 
   overflow-wrap: anywhere;
   text-wrap: balance;
+
+  white-space: pre-line;
 }
 
 .lumiCard--address .lumiCard__value {
