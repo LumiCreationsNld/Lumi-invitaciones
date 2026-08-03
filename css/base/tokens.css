@@ -1,0 +1,195 @@
+/*==================================================
+    LUMI DESIGN SYSTEM V1.0
+    DESIGN TOKENS
+==================================================*/
+
+:root {
+
+  /*==============================================
+      COLORES SEMÁNTICOS
+  ==============================================*/
+
+  --lumi-color-primary: #8b5cf6;
+  --lumi-color-secondary: #ff5db1;
+  --lumi-color-accent: #67d8ff;
+  --lumi-color-mint: #88e6c3;
+  --lumi-color-warning: #ffd98a;
+
+  --lumi-color-text: #34314a;
+  --lumi-color-text-soft: #625f78;
+  --lumi-color-white: #ffffff;
+
+  /*==============================================
+      SUPERFICIES
+  ==============================================*/
+
+  --lumi-surface-page: #f8efff;
+  --lumi-surface-glass: rgba(255, 255, 255, .46);
+  --lumi-surface-glass-strong: rgba(255, 255, 255, .70);
+  --lumi-surface-overlay: rgba(93, 52, 135, .13);
+
+  /*==============================================
+      DEGRADADOS
+  ==============================================*/
+
+  --lumi-gradient-primary:
+    linear-gradient(135deg, #ff69b8 0%, #c56af0 100%);
+
+  --lumi-gradient-secondary:
+    linear-gradient(135deg, #67c8ff 0%, #7f70f4 52%, #ff6fbd 100%);
+
+  --lumi-gradient-mint:
+    linear-gradient(135deg, #79e4d0 0%, #6fc9ff 100%);
+
+  --lumi-gradient-warning:
+    linear-gradient(135deg, #ffe7a7 0%, #ffc86f 100%);
+
+  --lumi-gradient-happy:
+    linear-gradient(135deg, #ff7dbe 0%, #b97af2 48%, #73d6f6 100%);
+
+  --lumi-gradient-glass:
+    linear-gradient(145deg, rgba(255,255,255,.78), rgba(255,255,255,.28));
+
+  /*==============================================
+      TIPOGRAFÍA
+  ==============================================*/
+
+  --lumi-font-display: "Futurino", "Fredoka", sans-serif;
+  --lumi-font-title: "Fredoka", "Baloo 2", sans-serif;
+  --lumi-font-body: "Poppins", Arial, sans-serif;
+
+  --lumi-font-size-xs: .75rem;
+  --lumi-font-size-sm: .875rem;
+  --lumi-font-size-md: 1rem;
+  --lumi-font-size-lg: 1.25rem;
+  --lumi-font-size-xl: 1.75rem;
+  --lumi-font-size-2xl: clamp(2.5rem, 12vw, 4.6rem);
+
+  --lumi-line-tight: .95;
+  --lumi-line-normal: 1.45;
+  --lumi-line-relaxed: 1.65;
+
+  /*==============================================
+      ESPACIADO — ESCALA 4 / 8 / 12 / 16 / 24 / 32
+  ==============================================*/
+
+  --lumi-space-1: .25rem;  /* 4px */
+  --lumi-space-2: .5rem;   /* 8px */
+  --lumi-space-3: .75rem;  /* 12px */
+  --lumi-space-4: 1rem;    /* 16px */
+  --lumi-space-5: 1.5rem;  /* 24px */
+  --lumi-space-6: 2rem;    /* 32px */
+  --lumi-space-7: 3rem;    /* 48px */
+  --lumi-space-8: 4rem;    /* 64px */
+
+  /*==============================================
+      RADIOS
+  ==============================================*/
+
+  --lumi-radius-sm: 12px;
+  --lumi-radius-md: 18px;
+  --lumi-radius-lg: 24px;
+  --lumi-radius-xl: 32px;
+  --lumi-radius-pill: 999px;
+
+  /*==============================================
+      BORDES Y CRISTAL
+  ==============================================*/
+
+  --lumi-glass-blur: 16px;
+  --lumi-glass-border: 1px solid rgba(255,255,255,.62);
+  --lumi-glass-highlight: inset 0 1px 0 rgba(255,255,255,.88);
+
+  /*==============================================
+      SOMBRAS
+  ==============================================*/
+
+  --lumi-shadow-soft:
+    0 8px 24px rgba(118, 75, 158, .14);
+
+  --lumi-shadow-card:
+    0 16px 38px rgba(103, 69, 145, .20),
+    var(--lumi-glass-highlight);
+
+  --lumi-shadow-button:
+    0 10px 24px rgba(139, 92, 246, .26),
+    inset 0 1px 0 rgba(255,255,255,.58);
+
+  --lumi-shadow-glow:
+    0 0 24px rgba(255, 93, 177, .24);
+
+  /*==============================================
+      DURACIONES Y CURVAS
+  ==============================================*/
+
+  --lumi-duration-instant: 120ms;
+  --lumi-duration-fast: 220ms;
+  --lumi-duration-normal: 420ms;
+  --lumi-duration-slow: 760ms;
+  --lumi-duration-entry: 900ms;
+
+  --lumi-ease-standard: cubic-bezier(.22, 1, .36, 1);
+  --lumi-ease-soft: cubic-bezier(.25, .8, .25, 1);
+
+  /*==============================================
+      CAPAS
+  ==============================================*/
+
+  --lumi-z-background: 0;
+  --lumi-z-content: 10;
+  --lumi-z-floating: 100;
+  --lumi-z-intro: 1000;
+
+  /*==============================================
+      MEDIDAS DEL LAYOUT
+  ==============================================*/
+
+  --lumi-invitation-max-width: 430px;
+  --lumi-content-max-width: 390px;
+
+  /*==============================================
+      TOKENS DE COMPONENTES: HEADER
+  ==============================================*/
+
+  --lumi-name-color: #ffffff;
+  --lumi-name-stroke: #7d3fbb;
+  --lumi-name-stroke-width: 7px;
+  --lumi-age-color: #ff5db1;
+
+  /*==============================================
+      ALIAS DE COMPATIBILIDAD ALPHA 3
+      Se retirarán después de migrar los componentes.
+  ==============================================*/
+
+  --color-primary: var(--lumi-color-primary);
+  --color-secondary: var(--lumi-color-secondary);
+  --color-text: var(--lumi-color-text);
+
+  --font-guest-name: var(--lumi-font-display);
+  --font-guest-age: var(--lumi-font-display);
+  --font-text: var(--lumi-font-body);
+
+  --guest-name-color: var(--lumi-name-color);
+  --guest-name-stroke: var(--lumi-name-stroke);
+  --guest-name-stroke-width: var(--lumi-name-stroke-width);
+  --guest-age-color: var(--lumi-age-color);
+
+  --invitation-max-width: var(--lumi-invitation-max-width);
+  --content-max-width: var(--lumi-content-max-width);
+
+  --space-xs: var(--lumi-space-2);
+  --space-sm: var(--lumi-space-3);
+  --space-md: var(--lumi-space-4);
+  --space-lg: var(--lumi-space-5);
+  --space-xl: var(--lumi-space-6);
+
+  --radius-md: var(--lumi-radius-md);
+  --radius-lg: var(--lumi-radius-xl);
+  --radius-pill: var(--lumi-radius-pill);
+
+  --shadow-soft: var(--lumi-shadow-soft);
+  --shadow-card: var(--lumi-shadow-card);
+
+  --entry-duration: var(--lumi-duration-slow);
+  --entry-easing: var(--lumi-ease-standard);
+}

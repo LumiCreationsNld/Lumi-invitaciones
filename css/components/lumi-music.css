@@ -1,0 +1,443 @@
+/*==================================================
+    LUMI MUSIC CONTROL — ALPHA 46
+==================================================*/
+
+.lumiMusic {
+  position: fixed;
+  right:
+    max(
+      18px,
+      env(safe-area-inset-right)
+    );
+  bottom:
+    max(
+      20px,
+      calc(16px + env(safe-area-inset-bottom))
+    );
+  z-index: 900;
+
+  width: 48px;
+  height: 48px;
+  padding: 0;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    1px solid
+    rgba(255,255,255,.72);
+  border-radius: 50%;
+
+  color: #ff67b7;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(156,121,244,.82),
+      rgba(103,62,205,.72)
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.88),
+    inset 0 -9px 18px rgba(73,34,151,.22),
+    0 10px 24px rgba(52,24,92,.24),
+    0 0 0 1px rgba(255,255,255,.12);
+
+  -webkit-backdrop-filter:
+    blur(14px)
+    saturate(1.18);
+  backdrop-filter:
+    blur(14px)
+    saturate(1.18);
+
+  cursor: pointer;
+  isolation: isolate;
+  overflow: visible;
+
+  transform:
+    translateZ(0)
+    scale(1);
+
+  transition:
+    transform 180ms ease,
+    color 220ms ease,
+    background 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    filter 220ms ease;
+}
+
+.lumiMusic::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  z-index: -1;
+
+  border-radius: inherit;
+
+  background:
+    radial-gradient(
+      circle at 34% 24%,
+      rgba(255,255,255,.74),
+      rgba(255,255,255,.16) 34%,
+      transparent 66%
+    );
+
+  pointer-events: none;
+}
+
+.lumiMusic__glow {
+  position: absolute;
+  inset: -7px;
+  z-index: -2;
+
+  border-radius: inherit;
+
+  background:
+    radial-gradient(
+      circle,
+      currentColor 0%,
+      transparent 68%
+    );
+
+  opacity: 0;
+  filter: blur(8px);
+  transform: scale(.72);
+
+  transition:
+    opacity 240ms ease,
+    transform 340ms ease;
+}
+
+.lumiMusic__icon {
+  position: absolute;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  opacity: 0;
+  transform: scale(.72) rotate(-7deg);
+
+  transition:
+    opacity 200ms ease,
+    transform 300ms cubic-bezier(.22,1,.36,1);
+}
+
+.lumiMusic__icon svg {
+  width: 24px;
+  height: 24px;
+  overflow: visible;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  filter:
+    drop-shadow(0 0 1px rgba(255,255,255,.98))
+    drop-shadow(0 0 2px rgba(255,255,255,.88))
+    drop-shadow(0 0 5px currentColor);
+}
+
+.lumiMusic__speaker {
+  fill:
+    color-mix(
+      in srgb,
+      currentColor 22%,
+      transparent
+    );
+}
+
+.lumiMusic.is-playing {
+  color: #62e2ee;
+
+  border-color:
+    rgba(255,255,255,.84);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(150,113,239,.88),
+      rgba(91,53,190,.78)
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.92),
+    inset 0 -9px 18px rgba(63,28,142,.24),
+    0 11px 25px rgba(49,25,91,.25),
+    0 0 16px rgba(98,226,238,.18);
+}
+
+.lumiMusic.is-muted {
+  color: #ff78c7;
+
+  border-color:
+    rgba(255,255,255,.82);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(150,113,239,.84),
+      rgba(96,55,194,.74)
+    );
+}
+
+.lumiMusic.is-playing
+.lumiMusic__icon--play,
+.lumiMusic.is-muted
+.lumiMusic__icon--muted {
+  opacity: 1;
+  transform:
+    scale(1)
+    rotate(0);
+}
+
+.lumiMusic.is-playing
+.lumiMusic__glow {
+  opacity: .24;
+  transform: scale(1.04);
+}
+
+.lumiMusic__spark {
+  position: absolute;
+  right: -3px;
+  top: -4px;
+
+  width: 9px;
+  height: 9px;
+
+  border:
+    1.5px solid
+    rgba(255,255,255,.96);
+  border-radius: 35%;
+
+  background: #ffe58d;
+
+  box-shadow:
+    0 0 8px rgba(255,229,141,.76);
+
+  opacity: 0;
+
+  transform:
+    rotate(45deg)
+    scale(.2);
+
+  pointer-events: none;
+}
+
+.lumiMusic.is-feedback {
+  animation:
+    lumiMusicFeedback
+    480ms
+    cubic-bezier(.22,1,.36,1)
+    both;
+}
+
+.lumiMusic.is-feedback
+.lumiMusic__glow {
+  animation:
+    lumiMusicGlow
+    520ms
+    ease-out
+    both;
+}
+
+.lumiMusic.is-sparkling
+.lumiMusic__spark {
+  animation:
+    lumiMusicSpark
+    620ms
+    cubic-bezier(.22,1,.36,1)
+    both;
+}
+
+.lumiMusic:active {
+  transform:
+    translateZ(0)
+    scale(.93);
+
+  transition-duration: 80ms;
+}
+
+.lumiMusic:focus-visible {
+  outline:
+    3px solid
+    rgba(255,255,255,.96);
+  outline-offset: 4px;
+}
+
+.lumiMusic:disabled {
+  cursor: not-allowed;
+  opacity: .52;
+  filter: grayscale(.45);
+}
+
+.lumiMusic.is-error {
+  color: #e7a741;
+}
+
+@media (hover: hover) {
+  .lumiMusic:hover {
+    transform:
+      translateZ(0)
+      translateY(-2px)
+      scale(1.035);
+
+    filter:
+      brightness(1.045)
+      saturate(1.08);
+
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.96),
+      inset 0 -9px 18px rgba(66,30,145,.22),
+      0 14px 29px rgba(48,22,88,.28),
+      0 0 19px rgba(255,255,255,.12);
+  }
+}
+
+@keyframes lumiMusicFeedback {
+  0% {
+    transform:
+      translateZ(0)
+      scale(.94)
+      rotate(-5deg);
+  }
+
+  55% {
+    transform:
+      translateZ(0)
+      scale(1.075)
+      rotate(4deg);
+  }
+
+  100% {
+    transform:
+      translateZ(0)
+      scale(1)
+      rotate(0);
+  }
+}
+
+@keyframes lumiMusicGlow {
+  0% {
+    opacity: 0;
+    transform: scale(.55);
+  }
+
+  48% {
+    opacity: .32;
+    transform: scale(1.18);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.38);
+  }
+}
+
+@keyframes lumiMusicSpark {
+  0% {
+    opacity: 0;
+    transform:
+      rotate(45deg)
+      scale(.2);
+  }
+
+  38% {
+    opacity: 1;
+    transform:
+      rotate(105deg)
+      scale(1.08);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(5px,-7px)
+      rotate(165deg)
+      scale(.55);
+  }
+}
+
+/* Celulares pequeños */
+@media (max-width: 360px) {
+  .lumiMusic {
+    right:
+      max(
+        14px,
+        env(safe-area-inset-right)
+      );
+    bottom:
+      max(
+        16px,
+        calc(12px + env(safe-area-inset-bottom))
+      );
+
+    width: 46px;
+    height: 46px;
+  }
+
+  .lumiMusic__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* Escritorio */
+@media (min-width: 600px) {
+  .lumiMusic {
+    right:
+      max(
+        24px,
+        env(safe-area-inset-right)
+      );
+    bottom:
+      max(
+        24px,
+        calc(18px + env(safe-area-inset-bottom))
+      );
+
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Navegadores sin color-mix */
+@supports not (
+  color:
+    color-mix(
+      in srgb,
+      white 50%,
+      transparent
+    )
+) {
+  .lumiMusic__speaker {
+    fill: rgba(255,255,255,.20);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumiMusic,
+  .lumiMusic__icon,
+  .lumiMusic__glow {
+    transition: none;
+  }
+
+  .lumiMusic.is-feedback,
+  .lumiMusic.is-feedback
+  .lumiMusic__glow,
+  .lumiMusic.is-sparkling
+  .lumiMusic__spark {
+    animation: none;
+  }
+
+  .lumiMusic.is-sparkling
+  .lumiMusic__spark {
+    opacity: .8;
+    transform:
+      rotate(45deg)
+      scale(.75);
+  }
+}

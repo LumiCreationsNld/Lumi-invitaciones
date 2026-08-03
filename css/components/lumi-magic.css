@@ -1,0 +1,633 @@
+/*==================================================
+    LUMI MAGIC ENGINE — SPARKLES ALPHA 48
+==================================================*/
+
+.lumiMagic {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  overflow: visible;
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
+.lumiMagic.is-active { opacity: 1; }
+
+.lumiMagic__particle {
+  position: absolute;
+  left: var(--magic-x, 50%);
+  top: var(--magic-y, 50%);
+  width: 25px;
+  aspect-ratio: 1;
+  color: var(--magic-color, #ffffff);
+  opacity: 0;
+  transform: translate(-50%,-50%) rotate(var(--magic-rotation,0deg)) scale(.16);
+  filter:
+    drop-shadow(0 0 4px rgba(255,255,255,1))
+    drop-shadow(0 0 10px currentColor)
+    drop-shadow(0 0 18px currentColor)
+    drop-shadow(0 4px 8px rgba(78,35,115,.20));
+  will-change: opacity, transform;
+}
+
+.lumiMagic__particle::before,
+.lumiMagic__particle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  background: currentColor;
+  border: 1.5px solid rgba(255,255,255,.94);
+  box-shadow: inset 0 0 4px rgba(255,255,255,.55);
+  transform-origin: center;
+}
+
+.lumiMagic__particle--diamond::before {
+  width: 70%;
+  height: 70%;
+  border-radius: 34%;
+  transform: rotate(45deg);
+}
+
+.lumiMagic__particle--diamond::after { display: none; }
+
+.lumiMagic__particle--soft-star::before {
+  width: 28%;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.lumiMagic__particle--soft-star::after {
+  width: 100%;
+  height: 28%;
+  border-radius: 999px;
+}
+
+.lumiMagic__particle--slender-star::before {
+  width: 20%;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.lumiMagic__particle--slender-star::after {
+  width: 100%;
+  height: 20%;
+  border-radius: 999px;
+}
+
+.lumiMagic__particle--b {
+  width: 19px;
+  filter:
+    drop-shadow(0 0 3px rgba(255,255,255,.98))
+    drop-shadow(0 0 8px currentColor)
+    drop-shadow(0 0 14px currentColor)
+    drop-shadow(0 3px 6px rgba(78,35,115,.16));
+}
+
+.lumiMagic__particle.is-visible {
+  animation: lumiMagicTwinkle var(--magic-duration,1800ms) cubic-bezier(.22,1,.36,1) both;
+}
+
+.lumiMagic__particle--burst { z-index: 4; }
+
+@keyframes lumiMagicTwinkle {
+  0% {
+    opacity: 0;
+    transform: translate(-50%,-50%) rotate(var(--magic-rotation,0deg)) scale(.16);
+  }
+
+  14% { opacity: .55; }
+
+  34% {
+    opacity: 1;
+    transform:
+      translate(calc(-50% + var(--magic-drift-x,0px)), calc(-50% + var(--magic-drift-y,0px)))
+      rotate(calc(var(--magic-rotation,0deg) + 5deg))
+      scale(calc(var(--magic-scale,1) * 1.06));
+  }
+
+  58% {
+    opacity: .88;
+    transform:
+      translate(calc(-50% + var(--magic-drift-x,0px)), calc(-50% + var(--magic-drift-y,0px)))
+      rotate(calc(var(--magic-rotation,0deg) - 2deg))
+      scale(calc(var(--magic-scale,1) * .84));
+  }
+
+  76% {
+    opacity: 1;
+    transform:
+      translate(calc(-50% + var(--magic-drift-x,0px)), calc(-50% + var(--magic-drift-y,0px)))
+      rotate(var(--magic-rotation,0deg))
+      scale(calc(var(--magic-scale,1) * .96));
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(calc(-50% + var(--magic-drift-x,0px)), calc(-50% + var(--magic-drift-y,0px)))
+      rotate(calc(var(--magic-rotation,0deg) + 7deg))
+      scale(.18);
+  }
+}
+
+@media (max-width: 420px) {
+  .lumiMagic__particle { width: 22px; }
+  .lumiMagic__particle--b { width: 17px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumiMagic { display: none; }
+}
+
+/*==================================================
+    FRAME HIGHLIGHT — ALPHA 51 VISIBILITY
+==================================================*/
+
+.lumiMagic__highlight {
+  position: absolute;
+  left: var(--highlight-x, 50%);
+  top: var(--highlight-y, 50%);
+  z-index: 8;
+
+  width: clamp(72px, 22vw, 104px);
+  height: 10px;
+
+  overflow: hidden;
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255,255,255,.34) 18%,
+      rgba(255,255,255,.86) 50%,
+      rgba(255,255,255,.34) 82%,
+      transparent 100%
+    );
+
+  box-shadow:
+    0 0 9px rgba(255,255,255,.96),
+    0 0 20px var(--highlight-color, #ffffff),
+    0 0 34px rgba(180,122,255,.54);
+
+  opacity: 0;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(var(--highlight-rotate, 0deg))
+    scaleX(.28);
+
+  transform-origin: center;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.lumiMagic__highlight::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -25%;
+
+  width: 28%;
+  height: 170%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      #ffffff 0%,
+      var(--highlight-color, #ffffff) 34%,
+      rgba(255,255,255,.34) 62%,
+      transparent 78%
+    );
+
+  box-shadow:
+    0 0 8px #ffffff,
+    0 0 18px var(--highlight-color, #ffffff),
+    0 0 30px var(--highlight-color, #ffffff);
+
+  opacity: 0;
+
+  transform:
+    translateY(-50%)
+    scale(.5);
+}
+
+.lumiMagic__highlight::after {
+  content: "";
+  position: absolute;
+  inset: 2px 7px;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.78),
+      transparent
+    );
+
+  opacity: 0;
+}
+
+.lumiMagic__highlight.is-visible {
+  animation:
+    lumiFrameHighlightShell
+    1900ms
+    cubic-bezier(.22,1,.36,1)
+    both;
+}
+
+.lumiMagic__highlight.is-visible::before {
+  animation:
+    lumiFrameHighlightSweep
+    1650ms
+    ease-in-out
+    120ms
+    both;
+}
+
+.lumiMagic__highlight.is-visible::after {
+  animation:
+    lumiFrameHighlightTrail
+    1750ms
+    ease
+    90ms
+    both;
+}
+
+@keyframes lumiFrameHighlightShell {
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--highlight-rotate, 0deg))
+      scaleX(.22);
+  }
+
+  22% {
+    opacity: .72;
+  }
+
+  48% {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--highlight-rotate, 0deg))
+      scaleX(1);
+  }
+
+  78% {
+    opacity: .74;
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--highlight-rotate, 0deg))
+      scaleX(.55);
+  }
+}
+
+@keyframes lumiFrameHighlightSweep {
+  0% {
+    left: -24%;
+    opacity: 0;
+    transform:
+      translateY(-50%)
+      scale(.45);
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  52% {
+    opacity: 1;
+    transform:
+      translateY(-50%)
+      scale(1);
+  }
+
+  100% {
+    left: 102%;
+    opacity: 0;
+    transform:
+      translateY(-50%)
+      scale(.55);
+  }
+}
+
+@keyframes lumiFrameHighlightTrail {
+  0% {
+    opacity: 0;
+  }
+
+  34% {
+    opacity: .78;
+  }
+
+  72% {
+    opacity: .45;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .lumiMagic__highlight {
+    width: clamp(68px, 24vw, 88px);
+    height: 7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumiMagic__highlight {
+    display: none;
+  }
+}
+
+
+
+/*==================================================
+    FRAME HIGHLIGHT — ALPHA 53 POSITION FIX
+==================================================*/
+
+#lumiFrame .lumiMagic__highlight {
+  z-index: 20;
+
+  /*
+    El centro del brillo coincide con el centro visual
+    de la línea rosa y el contorno blanco del marco.
+  */
+  transform:
+    translate(-50%, -50%)
+    rotate(var(--highlight-rotate, 0deg))
+    scaleX(.28);
+
+  mix-blend-mode: screen;
+}
+
+#lumiFrame .lumiMagic__highlight.is-visible {
+  animation:
+    lumiFrameHighlightShell
+    1900ms
+    cubic-bezier(.22,1,.36,1)
+    both;
+}
+
+@media (max-width: 420px) {
+  #lumiFrame .lumiMagic__highlight {
+    width: 74px;
+  }
+}
+
+
+/*==================================================
+    MIXED AMBIENT PARTICLES — ALPHA 54
+==================================================*/
+
+.lumiMagic__particle--heart::before {
+  width: 72%;
+  height: 66%;
+  border-radius: 52% 52% 45% 45% / 58% 58% 42% 42%;
+  transform: rotate(-45deg) translate(2%, 2%);
+}
+
+.lumiMagic__particle--heart::after {
+  display: block;
+  width: 72%;
+  height: 66%;
+  border-radius: 52% 52% 45% 45% / 58% 58% 42% 42%;
+  transform: rotate(45deg) translate(-2%, 2%);
+}
+
+.lumiMagic__particle--paw::before {
+  z-index: 1;
+
+  width: 66%;
+  height: 52%;
+  border-radius: 48% 52% 52% 48% / 60% 60% 40% 40%;
+  transform: translateY(20%);
+}
+
+.lumiMagic__particle--paw::after {
+  display: block;
+  width: 20%;
+  height: 20%;
+  border-radius: 50%;
+  box-shadow:
+    -7px -4px 0 currentColor,
+    -2.25px -7px 0 currentColor,
+    2.25px -7px 0 currentColor,
+    7px -4px 0 currentColor;
+
+  transform:
+    translateY(-1px)
+    scale(.88);
+}
+
+.lumiMagic__particle--heart.is-visible {
+  animation-name: lumiMagicHeartBeat;
+}
+
+.lumiMagic__particle--paw.is-visible {
+  animation-name: lumiMagicPawFade;
+}
+
+.lumiMagic__particle--c {
+  width: 17px;
+}
+
+@keyframes lumiMagicHeartBeat {
+  0% {
+    opacity: 0;
+    transform: translate(-50%,-50%) rotate(var(--magic-rotation,0deg)) scale(.18);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-50%,-50%) rotate(var(--magic-rotation,0deg))
+      scale(calc(var(--magic-scale,1) * 1.08));
+  }
+  52% {
+    opacity: .78;
+    transform: translate(-50%,-50%) rotate(var(--magic-rotation,0deg))
+      scale(calc(var(--magic-scale,1) * .9));
+  }
+  72% {
+    opacity: 1;
+    transform: translate(-50%,-50%) rotate(var(--magic-rotation,0deg))
+      scale(var(--magic-scale,1));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%,-50%) rotate(var(--magic-rotation,0deg)) scale(.2);
+  }
+}
+
+@keyframes lumiMagicPawFade {
+  0% {
+    opacity: 0;
+    transform: translate(-50%,-50%) rotate(var(--magic-rotation,0deg)) scale(.82);
+  }
+  28% { opacity: .96; }
+  72% { opacity: .9; }
+  100% {
+    opacity: 0;
+    transform:
+      translate(
+        calc(-50% + var(--magic-drift-x,0px)),
+        calc(-50% + var(--magic-drift-y,0px))
+      )
+      rotate(var(--magic-rotation,0deg))
+      scale(.92);
+  }
+}
+
+@media (max-width:420px) {
+  .lumiMagic__particle--c { width:15px; }
+}
+
+
+/*==================================================
+    ALPHA 56 — PAW + FRAME EDGE ALIGNMENT
+==================================================*/
+
+.lumiMagic__particle--paw {
+  isolation: isolate;
+}
+
+.lumiMagic__particle--paw::before,
+.lumiMagic__particle--paw::after {
+  position: absolute;
+}
+
+/*
+  El highlight se posiciona con las variables reales del marco.
+  Ya no depende de porcentajes verticales aproximados.
+*/
+#lumiFrame .lumiMagic__highlight--left {
+  left:
+    calc(
+      var(--frame-inset-inline)
+      + 3px
+    );
+}
+
+#lumiFrame .lumiMagic__highlight--right {
+  left: auto;
+  right:
+    calc(
+      var(--frame-inset-inline)
+      + 3px
+    );
+
+  transform:
+    translate(50%, -50%)
+    rotate(90deg)
+    scaleX(.28);
+}
+
+#lumiFrame .lumiMagic__highlight--right.is-visible {
+  animation-name:
+    lumiFrameHighlightShellRight;
+}
+
+#lumiFrame .lumiMagic__highlight--bottom {
+  top: auto;
+  bottom:
+    calc(
+      var(--frame-bottom)
+      - 5px
+    );
+
+  transform:
+    translate(-50%, 50%)
+    rotate(0deg)
+    scaleX(.28);
+}
+
+#lumiFrame .lumiMagic__highlight--bottom.is-visible {
+  animation-name:
+    lumiFrameHighlightShellBottom;
+}
+
+@keyframes lumiFrameHighlightShellRight {
+  0% {
+    opacity: 0;
+    transform:
+      translate(50%, -50%)
+      rotate(90deg)
+      scaleX(.22);
+  }
+
+  22% {
+    opacity: .72;
+  }
+
+  48% {
+    opacity: 1;
+    transform:
+      translate(50%, -50%)
+      rotate(90deg)
+      scaleX(1);
+  }
+
+  78% {
+    opacity: .74;
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(50%, -50%)
+      rotate(90deg)
+      scaleX(.55);
+  }
+}
+
+@keyframes lumiFrameHighlightShellBottom {
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, 50%)
+      rotate(0deg)
+      scaleX(.22);
+  }
+
+  22% {
+    opacity: .72;
+  }
+
+  48% {
+    opacity: 1;
+    transform:
+      translate(-50%, 50%)
+      rotate(0deg)
+      scaleX(1);
+  }
+
+  78% {
+    opacity: .74;
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(-50%, 50%)
+      rotate(0deg)
+      scaleX(.55);
+  }
+}
+
+/*
+  El techo curvo sigue desactivado de forma intencional:
+  requiere un recorrido SVG que copie su curva.
+*/

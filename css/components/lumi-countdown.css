@@ -1,0 +1,485 @@
+/*==================================================
+    LUMI COUNTDOWN V1.0
+==================================================*/
+
+.lumiCountdown {
+  width: 100%;
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(.4rem, 1.6cqw, .7rem);
+
+  padding: var(--lumi-space-2) 0;
+}
+
+.lumiCountdown__card {
+  --countdown-color: var(--lumi-color-primary);
+  --countdown-rgb: 255, 125, 190;
+
+  position: relative;
+  min-width: 0;
+  min-height: clamp(6.6rem, 29cqw, 8.2rem);
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding:
+    clamp(.48rem, 1.8cqw, .68rem)
+    clamp(.22rem, 1cqw, .45rem)
+    clamp(.62rem, 2cqw, .82rem);
+
+  border: 1px solid rgba(255, 255, 255, .72);
+  border-radius: clamp(1rem, 4cqw, 1.35rem);
+
+  background:
+    linear-gradient(
+      155deg,
+      rgba(255, 255, 255, .82),
+      rgba(255, 255, 255, .48)
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .94),
+    inset 0 -12px 22px rgba(var(--countdown-rgb), .08),
+    0 9px 20px rgba(77, 51, 122, .13),
+    0 0 16px rgba(var(--countdown-rgb), .10);
+
+  backdrop-filter: blur(var(--lumi-glass-blur));
+  -webkit-backdrop-filter: blur(var(--lumi-glass-blur));
+
+  isolation: isolate;
+}
+
+.lumiCountdown__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(var(--countdown-rgb), .17),
+      transparent 48%
+    );
+
+  pointer-events: none;
+}
+
+.lumiCountdown__card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 16%;
+  right: 16%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, .98),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+.lumiCountdown__card--pink {
+  --countdown-color: #f34f9d;
+  --countdown-rgb: 243, 79, 157;
+}
+
+.lumiCountdown__card--purple {
+  --countdown-color: #8f61e8;
+  --countdown-rgb: 143, 97, 232;
+}
+
+.lumiCountdown__card--blue {
+  --countdown-color: #4f9dea;
+  --countdown-rgb: 79, 157, 234;
+}
+
+.lumiCountdown__card--yellow {
+  --countdown-color: #e8a934;
+  --countdown-rgb: 255, 211, 118;
+}
+
+.lumiCountdown__icon {
+  width: clamp(1.35rem, 5.2cqw, 1.72rem);
+  height: clamp(1.35rem, 5.2cqw, 1.72rem);
+
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+
+  margin-bottom: clamp(.18rem, .8cqw, .32rem);
+
+  color: var(--countdown-color);
+}
+
+.lumiCountdown__icon svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+
+  fill: rgba(var(--countdown-rgb), .12);
+  stroke: currentColor;
+  stroke-width: 1.85;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  filter:
+    drop-shadow(0 2px 4px rgba(var(--countdown-rgb), .20));
+}
+
+.lumiCountdown__value {
+  display: block;
+
+  font-family: var(--lumi-font-title);
+  font-size: clamp(1.75rem, 9cqw, 2.55rem);
+  font-weight: 700;
+  line-height: .95;
+  letter-spacing: -.035em;
+  font-variant-numeric: tabular-nums;
+
+  color: var(--countdown-color);
+  -webkit-text-stroke: clamp(1px, .35cqw, 2px) rgba(255, 255, 255, .92);
+  paint-order: stroke fill;
+
+  text-shadow:
+    0 4px 10px rgba(var(--countdown-rgb), .20);
+
+  transform-origin: center;
+}
+
+.lumiCountdown__value.is-changing {
+  animation: lumiCountdownValueChange 360ms var(--lumi-ease-standard) both;
+}
+
+.lumiCountdown__divider {
+  position: relative;
+  width: 62%;
+  height: 1px;
+
+  margin:
+    clamp(.35rem, 1.25cqw, .5rem)
+    auto
+    clamp(.28rem, 1cqw, .42rem);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(var(--countdown-rgb), .56),
+      transparent
+    );
+}
+
+.lumiCountdown__divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+
+  background: var(--countdown-color);
+  box-shadow: 0 0 7px rgba(var(--countdown-rgb), .58);
+
+  transform: translate(-50%, -50%);
+}
+
+.lumiCountdown__label {
+  display: block;
+
+  font-family: var(--lumi-font-text);
+  font-size: clamp(.58rem, 2.8cqw, .78rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: .035em;
+  text-transform: uppercase;
+
+  color: var(--countdown-color);
+}
+
+#invitation.is-visible .lumiCountdown__card {
+  animation:
+    lumiCountdownCardEnter
+    var(--lumi-duration-slow)
+    var(--lumi-ease-standard)
+    both;
+
+  animation-delay:
+    calc(260ms + (var(--lumi-countdown-index) * 75ms));
+}
+
+.lumiCountdown__card--yellow .lumiCountdown__value.is-changing {
+  animation:
+    lumiCountdownValueChange 360ms var(--lumi-ease-standard) both,
+    lumiCountdownSecondGlow 360ms ease-out both;
+}
+
+.lumiCountdown--finished {
+  display: block;
+}
+
+.lumiCountdown__finishedCard {
+  width: 100%;
+  padding: var(--lumi-space-4);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lumi-space-2);
+
+  border: 1px solid rgba(255, 255, 255, .72);
+  border-radius: var(--lumi-radius-xl);
+
+  background: rgba(255, 255, 255, .68);
+  box-shadow: var(--lumi-shadow-card);
+  backdrop-filter: blur(var(--lumi-glass-blur));
+  -webkit-backdrop-filter: blur(var(--lumi-glass-blur));
+
+  color: var(--lumi-color-secondary);
+  font-family: var(--lumi-font-title);
+  text-align: center;
+}
+
+.lumiCountdown__finishedIcon {
+  color: var(--lumi-color-warning);
+  text-shadow: 0 0 10px rgba(255, 217, 138, .8);
+}
+
+@keyframes lumiCountdownCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes lumiCountdownValueChange {
+  0% {
+    opacity: .18;
+    transform: translateY(-7px) scale(.94);
+  }
+
+  58% {
+    opacity: 1;
+    transform: translateY(1px) scale(1.045);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes lumiCountdownSecondGlow {
+  0% {
+    text-shadow:
+      0 0 0 rgba(255, 211, 118, 0);
+  }
+
+  48% {
+    text-shadow:
+      0 0 16px rgba(255, 211, 118, .82),
+      0 4px 10px rgba(232, 169, 52, .24);
+  }
+
+  100% {
+    text-shadow:
+      0 4px 10px rgba(232, 169, 52, .20);
+  }
+}
+
+@container (max-width: 330px) {
+  .lumiCountdown {
+    gap: .34rem;
+  }
+
+  .lumiCountdown__card {
+    min-height: 6.15rem;
+    padding-inline: .12rem;
+  }
+
+  .lumiCountdown__divider {
+    width: 70%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumiCountdown__card,
+  .lumiCountdown__value,
+  .lumiCountdown__card--yellow .lumiCountdown__value {
+    animation: none !important;
+  }
+}
+/*==================================================
+    LUMI COUNTDOWN — PULIDO VISUAL ALPHA 36
+
+    Cambios:
+    - Mayor profundidad sin alterar el tamaño.
+    - Números con volumen y brillo sutil.
+    - Iconos con mayor presencia.
+    - Divisor con destello central más luminoso.
+==================================================*/
+
+/* Tarjetas ligeramente más elevadas y separadas del fondo. */
+.lumiCountdown__card {
+  border-color: rgba(255, 255, 255, .84);
+
+  background:
+    linear-gradient(
+      155deg,
+      rgba(255, 255, 255, .88) 0%,
+      rgba(255, 255, 255, .58) 46%,
+      rgba(255, 255, 255, .42) 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .98),
+    inset 0 -16px 24px rgba(var(--countdown-rgb), .10),
+    0 13px 24px rgba(74, 46, 118, .16),
+    0 5px 10px rgba(74, 46, 118, .10),
+    0 0 20px rgba(var(--countdown-rgb), .14);
+}
+
+/* Reflejo superior más definido para reforzar el efecto cristal. */
+.lumiCountdown__card::after {
+  left: 12%;
+  right: 12%;
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, .70) 18%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 255, 255, .70) 82%,
+      transparent
+    );
+
+  box-shadow:
+    0 2px 8px rgba(255, 255, 255, .46);
+}
+
+/* Luz de color ligeramente más presente dentro de cada tarjeta. */
+.lumiCountdown__card::before {
+  background:
+    radial-gradient(
+      circle at 50% -4%,
+      rgba(var(--countdown-rgb), .24),
+      rgba(var(--countdown-rgb), .08) 37%,
+      transparent 62%
+    );
+}
+
+/* Iconos con brillo interior y mejor separación del fondo. */
+.lumiCountdown__icon {
+  filter:
+    drop-shadow(0 2px 4px rgba(var(--countdown-rgb), .24))
+    drop-shadow(0 0 6px rgba(var(--countdown-rgb), .18));
+}
+
+.lumiCountdown__icon svg {
+  fill: rgba(var(--countdown-rgb), .17);
+
+  filter:
+    drop-shadow(0 2px 3px rgba(var(--countdown-rgb), .22))
+    drop-shadow(0 0 5px rgba(255, 255, 255, .46));
+}
+
+/*
+  El número conserva la tipografía y tamaño actuales.
+  Se añade volumen mediante una capa de luz y sombra cromática.
+*/
+.lumiCountdown__value {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, .98) 0%,
+      var(--countdown-color) 34%,
+      var(--countdown-color) 72%,
+      rgba(var(--countdown-rgb), .88) 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  -webkit-text-stroke:
+    clamp(1px, .38cqw, 2px)
+    rgba(255, 255, 255, .94);
+
+  text-shadow:
+    0 3px 0 rgba(var(--countdown-rgb), .11),
+    0 6px 12px rgba(var(--countdown-rgb), .25),
+    0 0 10px rgba(var(--countdown-rgb), .14);
+}
+
+/* Divisor ligeramente más luminoso y con centro tipo destello. */
+.lumiCountdown__divider {
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(var(--countdown-rgb), .28) 18%,
+      rgba(var(--countdown-rgb), .72) 50%,
+      rgba(var(--countdown-rgb), .28) 82%,
+      transparent
+    );
+}
+
+.lumiCountdown__divider::after {
+  width: 5px;
+  height: 5px;
+
+  background:
+    radial-gradient(
+      circle,
+      #ffffff 0 22%,
+      var(--countdown-color) 42%,
+      var(--countdown-color) 100%
+    );
+
+  box-shadow:
+    0 0 5px rgba(255, 255, 255, .92),
+    0 0 10px rgba(var(--countdown-rgb), .72),
+    0 0 16px rgba(var(--countdown-rgb), .36);
+}
+
+/* La etiqueta queda como apoyo visual, sin competir con el número. */
+.lumiCountdown__label {
+  opacity: .92;
+
+  text-shadow:
+    0 2px 5px rgba(var(--countdown-rgb), .16);
+}
+
+/* Refuerzo muy sutil para el pulso de los segundos. */
+.lumiCountdown__card--yellow .lumiCountdown__value.is-changing {
+  filter:
+    drop-shadow(0 0 6px rgba(255, 211, 118, .34));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumiCountdown__card--yellow .lumiCountdown__value.is-changing {
+    filter: none;
+  }
+}

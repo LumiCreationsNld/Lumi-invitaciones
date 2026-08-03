@@ -1,99 +1,11 @@
-/*==================================================
-    LUMI INVITATIONS FRAMEWORK
-    CORE NAMESPACE
-==================================================*/
-
 const Lumi = {
-
-    version:"0.4.0",
-
-    modulos:{},
-
-
-    /*==============================================
-        REGISTRAR MÓDULO
-    ==============================================*/
-
-    registrar(nombre, modulo){
-
-        if(!nombre){
-
-            console.error(
-                "Lumi.registrar necesita un nombre."
-            );
-
-            return;
-
-        }
-
-        if(!modulo){
-
-            console.error(
-                `No se pudo registrar el módulo "${nombre}".`
-            );
-
-            return;
-
-        }
-
-        if(this.modulos[nombre]){
-
-            console.warn(
-                `El módulo "${nombre}" ya estaba registrado y será reemplazado.`
-            );
-
-        }
-
-        this.modulos[nombre] = modulo;
-
-        this[nombre] = modulo;
-
-    },
-
-
-    /*==============================================
-        OBTENER MÓDULO
-    ==============================================*/
-
-    obtener(nombre){
-
-        return this.modulos[nombre] || null;
-
-    },
-
-
-    /*==============================================
-        COMPROBAR MÓDULO
-    ==============================================*/
-
-    existe(nombre){
-
-        return Boolean(
-            this.modulos[nombre]
-        );
-
-    },
-
-
-    /*==============================================
-        INFORMACIÓN DEL FRAMEWORK
-    ==============================================*/
-
-    info(){
-
-        return {
-
-            nombre:
-                "Lumi Invitations Framework",
-
-            version:
-                this.version,
-
-            modulos:
-                Object.keys(this.modulos)
-
-        };
-
-    }
-
+  version: "4.0.0-alpha.7",
+  modules: new Map(),
+  register(name, module) {
+    if (!name || !module) throw new Error("Lumi.register requiere nombre y módulo.");
+    if (this.modules.has(name)) throw new Error(`El módulo ${name} ya está registrado.`);
+    this.modules.set(name, module);
+    this[name] = module;
+  },
+  get(name) { return this.modules.get(name) ?? null; }
 };

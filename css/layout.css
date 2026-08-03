@@ -1,189 +1,111 @@
-/*======================================
-    LUMI INVITATIONS FRAMEWORK V3.2
-    LAYOUT.CSS
-======================================*/
-
-
-/*======================================
-    INTRO
-======================================*/
-
-#intro{
-
-    position:fixed;
-    inset:0;
-
-    display:grid;
-    place-items:center;
-
-    padding:var(--space-lg);
-
-    z-index:1000;
-
+#background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  background: #dcd2ff;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
-.introCard{
-
-    width:min(
-        100%,
-        380px
-    );
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-
-    gap:var(--space-md);
-
-    text-align:center;
-
+#backgroundImage {
+  position: absolute;
+  inset: -16px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
-
-/*======================================
-    INVITACIÓN
-======================================*/
-
-#invitation{
-
-    position:relative;
-
-    width:min(
-        100%,
-        var(--invitation-max-width)
-    );
-
-    min-height:100vh;
-
-    margin:0 auto;
-
-    padding:
-        var(--space-lg)
-        var(--space-md);
-
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-
+#backgroundOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,.08),
+    rgba(95,45,130,.15)
+  );
 }
 
-#frame{
-
-    position:absolute;
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    object-fit:fill;
-
-    pointer-events:none;
-
-    z-index:1;
-
-}
-
-#content{
-
-    position:relative;
-
-    width:100%;
-    max-width:var(--content-max-width);
-
-    min-height:100%;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-
-    gap:var(--space-md);
-
-    padding:
-        var(--space-xl)
-        var(--space-md);
-
-    z-index:2;
-
+#particles {
+  position: absolute;
+  inset: 0;
 }
 
 
-/*======================================
-    SECCIONES
-======================================*/
+#invitation {
+  position: relative;
+  z-index: 2;
+  width: min(100%, var(--invitation-max-width));
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md)
+    calc(var(--space-xl) + env(safe-area-inset-bottom));
+}
+
+#frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#content {
+  position: relative;
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:0;
+  padding: var(--space-xl) var(--space-md);
+  z-index: 2;
+}
 
 #header,
 #eventInfo,
 #countdown,
 #character,
-#actions{
+#actions { width:100%; }
 
-    width:100%;
+#header{margin-bottom:.9rem;}
 
+#eventInfo {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  column-gap: var(--space-sm);
+  row-gap: .9rem;
+  margin-bottom:1.4rem;
 }
 
-#header{
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-
-    text-align:center;
-
+#countdown {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: var(--space-xs);
+  margin-bottom:.8rem;
 }
 
-#eventInfo{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(0,1fr)
-        );
-
-    gap:var(--space-sm);
-
+#character {
+  display: flex;
+  justify-content: center;
+  margin-bottom:.7rem;
 }
 
-#countdown{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(
-            4,
-            minmax(0,1fr)
-        );
-
-    gap:var(--space-xs);
-
-}
-
-#character{
-
-    display:flex;
-    justify-content:center;
-    align-items:flex-end;
-
-}
-
-#actions{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:var(--space-sm);
-
-    width:100%;
-
-    pointer-events:none;
-
-}
-
-
-#actions.actions--visible{
-
-    pointer-events:auto;
-
+#actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }

@@ -1,0 +1,343 @@
+/*==================================================
+    LUMI FRAME V2.0 — ROSA + BLANCO + GLOW MORADO
+
+    Estructura visual definitiva:
+    1. Línea rosa protagonista.
+    2. Contorno blanco limpio.
+    3. Resplandor morado difuso, sin borde morado sólido.
+==================================================*/
+
+.lumiFrame {
+  --frame-white: rgba(255, 255, 255, .98);
+  --frame-pink: #ff62b8;
+  --frame-glow-purple: rgba(116, 48, 214, .92);
+
+  --frame-roof-height: clamp(76px, 22cqw, 104px);
+  --frame-side-offset: calc(var(--frame-roof-height) - 9px);
+  --frame-inset-inline: clamp(5px, 1.45cqw, 8px);
+  --frame-bottom: clamp(7px, 2cqw, 12px);
+
+  position: absolute;
+  inset: 0;
+  /* El marco queda detrás del contenido para que su glow no cubra el nombre. */
+  z-index: 1;
+  pointer-events: none;
+  container-type: inline-size;
+}
+
+/*==================================================
+    PARTE SUPERIOR
+==================================================*/
+
+.lumiFrame__roof {
+  position: absolute;
+  inset: 0 var(--frame-inset-inline) auto;
+  height: var(--frame-roof-height);
+}
+
+.lumiFrame__roof svg:first-child {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.lumiFrame__roofGlow,
+.lumiFrame__roofOuter,
+.lumiFrame__roofWhite,
+.lumiFrame__roofPink {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+/*
+  La antigua línea morada sólida deja de mostrarse.
+  Se conserva en el HTML para no tener que modificar index.html.
+*/
+.lumiFrame__roofOuter {
+  display: none;
+}
+
+/* Glow morado difuso: no funciona como delineado. */
+.lumiFrame__roofGlow {
+  stroke: var(--frame-glow-purple);
+  stroke-width: 27;
+  opacity: .82;
+  filter: blur(7px);
+}
+
+/* Contorno blanco suficientemente grueso para permanecer visible. */
+.lumiFrame__roofWhite {
+  stroke: var(--frame-white);
+  stroke-width: 11;
+}
+
+/* Línea rosa central, montada sobre el blanco. */
+.lumiFrame__roofPink {
+  stroke: var(--frame-pink);
+  stroke-width: 6;
+  filter:
+    drop-shadow(0 0 2px rgba(255, 116, 194, .85))
+    drop-shadow(0 0 5px rgba(255, 116, 194, .55));
+}
+
+/*==================================================
+    CORAZÓN SUPERIOR
+==================================================*/
+
+.lumiFrame__heart {
+  position: absolute;
+  top: clamp(5px, 1.5cqw, 8px);
+  left: 50%;
+
+  width: clamp(36px, 10.2cqw, 51px);
+  height: auto;
+
+  transform: translateX(-50%);
+  overflow: visible;
+
+  fill: #ff77bd;
+  stroke: #ffffff;
+  stroke-width: 7;
+  paint-order: stroke fill;
+
+  filter:
+    drop-shadow(0 0 3px rgba(255,255,255,.68))
+    drop-shadow(0 0 10px rgba(116,48,214,.82));
+}
+
+/*==================================================
+    LATERALES Y BASE
+==================================================*/
+
+.lumiFrame__body {
+  position: absolute;
+  top: var(--frame-side-offset);
+  right: var(--frame-inset-inline);
+  bottom: var(--frame-bottom);
+  left: var(--frame-inset-inline);
+
+  /* Único contorno visible de fondo: blanco. */
+  border-right: 10px solid var(--frame-white);
+  border-bottom: 10px solid var(--frame-white);
+  border-left: 10px solid var(--frame-white);
+
+  border-radius:
+    0 0
+    clamp(28px, 7cqw, 42px)
+    clamp(28px, 7cqw, 42px);
+
+  /* El morado es únicamente luz difusa. */
+  filter:
+    drop-shadow(0 0 5px var(--frame-glow-purple))
+    drop-shadow(0 0 14px rgba(116, 48, 214, .82))
+    drop-shadow(0 0 26px rgba(116, 48, 214, .48));
+}
+
+/* Se desactiva la capa intermedia anterior. */
+.lumiFrame__body::before {
+  content: none;
+}
+
+/* Línea rosa central alineada sobre el contorno blanco. */
+.lumiFrame__body::after {
+  content: "";
+  position: absolute;
+
+  top: 0;
+  right: -10px;
+  bottom: -10px;
+  left: -10px;
+
+  border-right: 6px solid var(--frame-pink);
+  border-bottom: 6px solid var(--frame-pink);
+  border-left: 6px solid var(--frame-pink);
+  border-radius: inherit;
+
+  box-shadow:
+    0 0 3px rgba(255, 98, 184, .82),
+    0 0 7px rgba(255, 98, 184, .42);
+
+  pointer-events: none;
+}
+
+/*==================================================
+    ELEMENTOS DECORATIVOS
+==================================================*/
+
+.lumiFrame__ornaments {
+  position: absolute;
+  inset: 0;
+}
+
+.lumiFrame__ornament {
+  position: absolute;
+  width: clamp(19px, 5.4cqw, 28px);
+  height: auto;
+  overflow: visible;
+
+  stroke: #fff;
+  stroke-width: 5;
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+.lumiFrame__ornament--star:nth-child(1) {
+  top: 7%;
+  left: 15%;
+  transform: rotate(-12deg);
+}
+
+.lumiFrame__ornament--star:nth-child(2) {
+  top: 4%;
+  right: 17%;
+  transform: rotate(11deg) scale(.82);
+}
+
+.lumiFrame__ornament--star:nth-child(3) {
+  top: 32%;
+  right: 7%;
+  transform: rotate(18deg) scale(.74);
+}
+
+.lumiFrame__ornament--heart:nth-child(4) {
+  top: 27%;
+  left: 7%;
+  transform: rotate(-10deg);
+}
+
+.lumiFrame__ornament--heart:nth-child(5) {
+  top: 43%;
+  right: 9%;
+  transform: rotate(12deg) scale(.88);
+}
+
+.star--yellow {
+  fill: #ffd274;
+  color: rgba(255, 202, 87, .65);
+}
+
+.star--aqua {
+  fill: #76dbea;
+  color: rgba(90, 213, 230, .62);
+}
+
+.star--pink {
+  fill: #ff7fbd;
+  color: rgba(255, 104, 185, .62);
+}
+
+.heart--pink {
+  fill: #ff76ba;
+  color: rgba(255, 91, 180, .64);
+}
+
+.heart--purple {
+  fill: #a878ed;
+  color: rgba(151, 103, 225, .65);
+}
+
+/*==================================================
+    HUELLITAS
+==================================================*/
+
+.lumiFrame__paw {
+  position: absolute;
+  width: clamp(39px, 11cqw, 55px);
+  height: auto;
+  overflow: visible;
+
+  filter:
+    drop-shadow(0 0 3px rgba(255,255,255,.9))
+    drop-shadow(0 5px 8px rgba(93,42,143,.3));
+}
+
+.lumiFrame__paw .pawPad,
+.lumiFrame__paw .pawToe {
+  fill: currentColor;
+  stroke: #fff;
+  stroke-width: 4.5;
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+}
+
+.lumiFrame__paw--topLeft {
+  top: clamp(48px, 13cqw, 66px);
+  left: clamp(0px, .4cqw, 4px);
+  color: #ff72b8;
+  transform: rotate(-14deg);
+}
+
+.lumiFrame__paw--topRight {
+  top: clamp(48px, 13cqw, 66px);
+  right: clamp(0px, .4cqw, 4px);
+  color: #69d6df;
+  transform: rotate(14deg);
+}
+
+.lumiFrame__paw--bottomLeft {
+  left: clamp(-1px, .3cqw, 3px);
+  bottom: clamp(4px, 1.7cqw, 11px);
+  color: #69d6df;
+  transform: rotate(-13deg);
+}
+
+.lumiFrame__paw--bottomRight {
+  right: clamp(-1px, .3cqw, 3px);
+  bottom: clamp(4px, 1.7cqw, 11px);
+  color: #ff72b8;
+  transform: rotate(13deg);
+}
+
+/*==================================================
+    ANIMACIONES
+==================================================*/
+
+#invitation.is-visible .lumiFrame__roof,
+#invitation.is-visible .lumiFrame__body,
+#invitation.is-visible .lumiFrame__ornament,
+#invitation.is-visible .lumiFrame__paw {
+  animation: lumiFrameReveal 900ms var(--lumi-ease-standard) both;
+}
+
+#invitation.is-visible .lumiFrame__heart {
+  animation: lumiFrameHeartReveal 900ms var(--lumi-ease-standard) both;
+}
+
+@keyframes lumiFrameReveal {
+  from {
+    opacity: 0;
+    transform: scale(.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes lumiFrameHeartReveal {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(.88);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumiFrame__roof,
+  .lumiFrame__body,
+  .lumiFrame__heart,
+  .lumiFrame__ornament,
+  .lumiFrame__paw {
+    animation: none !important;
+  }
+}

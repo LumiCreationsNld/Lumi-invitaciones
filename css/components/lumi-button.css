@@ -1,0 +1,332 @@
+/*==================================================
+    LUMI BUTTONS V1.0
+==================================================*/
+
+#actions {
+  width: min(100%, 360px);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lumi-space-3);
+}
+
+.lumiButton {
+  --lumi-button-start: #ff69b8;
+  --lumi-button-middle: #e86ad2;
+  --lumi-button-end: #a96df1;
+  --lumi-button-shadow: rgba(161, 73, 190, .34);
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  width: 100%;
+  min-height: 72px;
+  padding: .72rem .86rem;
+
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 28px;
+  align-items: center;
+  gap: .75rem;
+
+  border: 1px solid rgba(255, 255, 255, .82);
+  border-radius: var(--lumi-radius-pill);
+
+  color: #ffffff;
+  background:
+    linear-gradient(
+      115deg,
+      var(--lumi-button-start) 0%,
+      var(--lumi-button-middle) 48%,
+      var(--lumi-button-end) 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .70),
+    inset 0 -5px 10px rgba(97, 44, 136, .10),
+    0 8px 0 rgba(104, 53, 151, .16),
+    0 14px 25px var(--lumi-button-shadow);
+
+  font-family: var(--lumi-font-title);
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+
+  transition:
+    transform var(--lumi-duration-fast) var(--lumi-ease-standard),
+    box-shadow var(--lumi-duration-fast) var(--lumi-ease-standard),
+    filter var(--lumi-duration-fast) var(--lumi-ease-standard);
+
+  animation:
+    lumiButtonEnter
+    var(--lumi-duration-slow)
+    var(--lumi-ease-standard)
+    calc(520ms + (var(--lumi-button-index, 0) * 90ms))
+    both;
+}
+
+.lumiButton--rosa {
+  --lumi-button-start: #ff76bd;
+  --lumi-button-middle: #f05bc2;
+  --lumi-button-end: #b86ff3;
+  --lumi-button-shadow: rgba(221, 81, 178, .30);
+}
+
+.lumiButton--morado {
+  --lumi-button-start: #6fc9ff;
+  --lumi-button-middle: #8177f4;
+  --lumi-button-end: #dc6ddd;
+  --lumi-button-shadow: rgba(100, 91, 220, .30);
+}
+
+.lumiButton--azul {
+  --lumi-button-start: #65d8f4;
+  --lumi-button-middle: #7087f5;
+  --lumi-button-end: #a56ce9;
+  --lumi-button-shadow: rgba(83, 126, 225, .30);
+}
+
+.lumiButton::before {
+  content: "";
+  position: absolute;
+  inset: 1px 8px auto;
+  height: 46%;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, .45),
+      rgba(255, 255, 255, .08)
+    );
+  opacity: .72;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.lumiButton__icon {
+  position: relative;
+  z-index: 2;
+
+  width: 48px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(255, 255, 255, .72);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .18);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .58),
+    0 5px 12px rgba(70, 30, 112, .15);
+
+  transition:
+    transform var(--lumi-duration-fast) var(--lumi-ease-standard),
+    background-color var(--lumi-duration-fast) ease;
+}
+
+.lumiButton__icon svg {
+  width: 25px;
+  height: 25px;
+  fill: currentColor;
+  stroke: none;
+  filter: drop-shadow(0 2px 2px rgba(83, 42, 118, .14));
+}
+
+.lumiButton__copy {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .12rem;
+}
+
+.lumiButton__title {
+  font-size: clamp(1rem, 4.5cqw, 1.2rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: .018em;
+
+  -webkit-text-stroke: 1px rgba(255, 255, 255, .22);
+  paint-order: stroke fill;
+  text-shadow: 0 2px 4px rgba(83, 42, 118, .18);
+}
+
+.lumiButton__description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  margin-top: 1px;
+  color: rgba(255, 255, 255, .84);
+  font-family: var(--lumi-font-body);
+  font-size: clamp(.68rem, 2.8cqw, .78rem);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.lumiButton__arrow {
+  position: relative;
+  z-index: 2;
+
+  width: 30px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .28),
+    0 0 10px rgba(255, 255, 255, .10);
+
+  transition:
+    transform var(--lumi-duration-fast) var(--lumi-ease-standard),
+    background-color var(--lumi-duration-fast) ease;
+}
+
+.lumiButton__arrow svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.lumiButton__shine {
+  position: absolute;
+  z-index: 1;
+  top: -35%;
+  bottom: -35%;
+  left: -42%;
+  width: 28%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, .12),
+      rgba(255, 255, 255, .62),
+      rgba(255, 255, 255, .12),
+      transparent
+    );
+
+  transform: skewX(-18deg);
+  pointer-events: none;
+
+  animation:
+    lumiButtonIdleShine
+    8s
+    ease-in-out
+    calc(1.4s + (var(--lumi-button-index, 0) * 1.1s))
+    infinite;
+}
+
+@media (hover: hover) {
+  .lumiButton:hover {
+    transform: translateY(-2px) scale(1.01);
+    filter: saturate(1.06) brightness(1.03);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, .78),
+      inset 0 -5px 10px rgba(97, 44, 136, .08),
+      0 10px 0 rgba(104, 53, 151, .14),
+      0 18px 30px var(--lumi-button-shadow);
+  }
+
+  .lumiButton:hover .lumiButton__icon {
+    transform: rotate(-5deg) scale(1.06);
+    background: rgba(255, 255, 255, .25);
+  }
+
+  .lumiButton:hover .lumiButton__arrow {
+    transform: translateX(3px);
+    background: rgba(255, 255, 255, .20);
+  }
+
+  .lumiButton:hover .lumiButton__shine {
+    animation: lumiButtonShine 760ms var(--lumi-ease-standard);
+  }
+}
+
+.lumiButton:active {
+  transform: translateY(2px) scale(.985);
+  box-shadow:
+    inset 0 2px 6px rgba(84, 37, 119, .16),
+    inset 0 1px 0 rgba(255, 255, 255, .50),
+    0 2px 0 rgba(104, 53, 151, .14),
+    0 6px 12px var(--lumi-button-shadow);
+}
+
+.lumiButton:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, .96);
+  outline-offset: 4px;
+  box-shadow:
+    0 0 0 7px rgba(119, 91, 224, .35),
+    inset 0 1px 0 rgba(255, 255, 255, .72),
+    0 14px 25px var(--lumi-button-shadow);
+}
+
+.lumiButton:disabled {
+  cursor: not-allowed;
+  filter: grayscale(.35);
+  opacity: .58;
+  transform: none;
+  box-shadow: var(--lumi-shadow-soft);
+}
+
+@keyframes lumiButtonEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+@keyframes lumiButtonIdleShine {
+  0%, 78%, 100% { left: -42%; opacity: 0; }
+  81% { opacity: .32; }
+  88% { left: 122%; opacity: .18; }
+  89% { opacity: 0; }
+}
+
+@keyframes lumiButtonShine {
+  from { left: -42%; }
+  to { left: 122%; }
+}
+
+@container (max-width: 340px) {
+  .lumiButton {
+    min-height: 67px;
+    grid-template-columns: 43px minmax(0, 1fr) 25px;
+    gap: .62rem;
+    padding: .65rem .72rem;
+  }
+
+  .lumiButton__icon {
+    width: 43px;
+  }
+
+  .lumiButton__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumiButton,
+  .lumiButton__icon,
+  .lumiButton__arrow,
+  .lumiButton__shine {
+    animation: none !important;
+    transition: none !important;
+  }
+}

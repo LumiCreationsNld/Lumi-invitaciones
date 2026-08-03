@@ -1,0 +1,35 @@
+/*==================================================
+    LUMI DESIGN SYSTEM V1.0
+    TYPOGRAPHY
+==================================================*/
+
+@font-face {
+  font-family: "Futurino";
+  src: url("../../assets/themes/gabby/fonts/Futurino.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  font-family: var(--lumi-font-body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.lumi-type-display {
+  font-family: var(--lumi-font-display);
+  line-height: var(--lumi-line-tight);
+}
+
+.lumi-type-title {
+  font-family: var(--lumi-font-title);
+  line-height: 1.1;
+}
+
+.lumi-type-body {
+  font-family: var(--lumi-font-body);
+  line-height: var(--lumi-line-normal);
+}

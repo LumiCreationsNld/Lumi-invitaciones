@@ -1,0 +1,843 @@
+/*==================================================
+    LUMI INTRO 2.0 — COMPOSICIÓN
+
+    Rol:
+    - El mensaje es el protagonista.
+    - La firma Lumi acompaña desde fuera de la tarjeta.
+    - La estructura queda preparada para la apertura tipo portal.
+==================================================*/
+
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: grid;
+  place-items: center;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding:
+    max(var(--space-lg), env(safe-area-inset-top))
+    var(--space-lg)
+    max(var(--space-lg), env(safe-area-inset-bottom));
+
+  overflow: hidden;
+}
+
+.lumiIntro {
+  width: min(100%, 390px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: clamp(1.25rem, 5vw, 1.8rem);
+}
+
+/*==================================================
+    TARJETA
+==================================================*/
+
+.introCard {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  width: 100%;
+  padding:
+    clamp(2.1rem, 8vw, 3rem)
+    clamp(1.45rem, 6vw, 2.25rem)
+    clamp(1.7rem, 7vw, 2.35rem);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border:
+    1px solid
+    rgba(255,255,255,.78);
+
+  border-radius:
+    clamp(1.65rem, 7vw, 2.15rem);
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.82),
+      rgba(255,255,255,.52)
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.98),
+    0 24px 55px rgba(74,38,112,.22),
+    0 0 0 1px rgba(213,181,255,.16);
+
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+/* Luz superior que prepara la futura división tipo portal. */
+.introCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 4%,
+      rgba(255,255,255,.82),
+      rgba(255,225,245,.28) 36%,
+      transparent 67%
+    );
+}
+
+/* Línea central invisible en reposo; servirá como eje del portal. */
+.introCard::after {
+  content: "";
+  position: absolute;
+  top: 12%;
+  bottom: 12%;
+  left: 50%;
+  z-index: -1;
+
+  width: 1px;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(255,255,255,.62),
+      transparent
+    );
+
+  opacity: 0;
+  transform: translateX(-50%);
+}
+
+/*==================================================
+    DESTELLO PRINCIPAL
+==================================================*/
+
+.introSpark {
+  display: grid;
+  place-items: center;
+
+  color: #ffd978;
+
+  filter:
+    drop-shadow(0 0 7px rgba(255,217,120,.64));
+}
+
+.introSpark--top {
+  width: clamp(2rem, 9vw, 2.65rem);
+  margin-bottom: clamp(.85rem, 3.5vw, 1.1rem);
+}
+
+.introSpark svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+
+  fill: currentColor;
+  stroke: rgba(255,255,255,.96);
+  stroke-width: 2.3;
+  stroke-linejoin: round;
+}
+
+/*==================================================
+    MENSAJE
+==================================================*/
+
+#introTitle {
+  max-width: 12ch;
+  margin: 0;
+
+  font-family: var(--lumi-font-title, "Fredoka", sans-serif);
+  font-size:
+    clamp(
+      2rem,
+      8.4vw,
+      2.85rem
+    );
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -.025em;
+
+  color: #55317f;
+
+  text-wrap: balance;
+
+  text-shadow:
+    0 3px 0 rgba(255,255,255,.68),
+    0 8px 18px rgba(111,64,153,.14);
+}
+
+#introSubtitle {
+  max-width: 27ch;
+  margin:
+    clamp(.95rem, 4vw, 1.25rem)
+    auto
+    0;
+
+  font-family: var(--lumi-font-text, "Poppins", sans-serif);
+  font-size:
+    clamp(
+      .93rem,
+      3.8vw,
+      1.08rem
+    );
+  font-weight: 500;
+  line-height: 1.58;
+
+  color: #604d75;
+
+  text-wrap: balance;
+}
+
+/*==================================================
+    BOTÓN
+==================================================*/
+
+.introButton {
+  position: relative;
+  overflow: hidden;
+
+  min-width: min(100%, 245px);
+  min-height: 56px;
+
+  margin-top:
+    clamp(
+      1.45rem,
+      6vw,
+      1.9rem
+    );
+
+  padding:
+    .9rem
+    1.55rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: .62rem;
+
+  border:
+    1px solid
+    rgba(255,255,255,.72);
+
+  border-radius:
+    var(--lumi-radius-pill, 999px);
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff62ae 0%,
+      #be6bed 52%,
+      #7775ee 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.45),
+    0 13px 28px rgba(116,70,171,.28),
+    0 0 17px rgba(255,98,174,.17);
+
+  font-family: var(--lumi-font-text, "Poppins", sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .015em;
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    filter 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.introButton::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255,255,255,.34) 48%,
+      transparent 72%
+    );
+
+  transform: translateX(-125%);
+  transition: transform 650ms ease;
+}
+
+.introButton__spark {
+  width: 1.15rem;
+  height: 1.15rem;
+
+  display: grid;
+  place-items: center;
+
+  flex: 0 0 auto;
+
+  color: #ffe69e;
+
+  filter:
+    drop-shadow(0 0 5px rgba(255,230,158,.75));
+}
+
+.introButton__spark svg {
+  width: 100%;
+  height: 100%;
+
+  fill: currentColor;
+  stroke: rgba(255,255,255,.92);
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+}
+
+.introButton__label {
+  position: relative;
+  z-index: 1;
+}
+
+@media (hover: hover) {
+  .introButton:hover {
+    transform: translateY(-3px) scale(1.01);
+    filter: brightness(1.05) saturate(1.04);
+
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.52),
+      0 17px 34px rgba(116,70,171,.33),
+      0 0 22px rgba(255,98,174,.22);
+  }
+
+  .introButton:hover::before {
+    transform: translateX(125%);
+  }
+}
+
+.introButton:active {
+  transform: translateY(1px) scale(.98);
+}
+
+.introButton:focus-visible {
+  outline:
+    3px solid
+    rgba(255,255,255,.95);
+  outline-offset: 4px;
+}
+
+/*==================================================
+    FIRMA LUMI
+==================================================*/
+
+.lumiSignature {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: #ffffff;
+
+  filter:
+    drop-shadow(0 5px 11px rgba(69,31,100,.22));
+}
+
+.lumiSignature::before {
+  content: "";
+  width: 84px;
+  height: 1px;
+
+  margin-bottom:
+    clamp(
+      .75rem,
+      3vw,
+      .95rem
+    );
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.80),
+      transparent
+    );
+}
+
+.lumiSignature__word {
+  position: relative;
+
+  font-family: "Cookie", cursive;
+  font-size:
+    clamp(
+      3.62rem,
+      15.8vw,
+      4.68rem
+    );
+  font-weight: 700;
+  line-height: .72;
+  letter-spacing: 0;
+
+  color: transparent;
+  background:
+    linear-gradient(
+      105deg,
+      #ff4aab 0%,
+      #b25cff 34%,
+      #46dcff 68%,
+      #ffe27a 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  filter:
+    drop-shadow(0 1px 0 rgba(255,255,255,.65))
+    drop-shadow(0 0 8px rgba(255,255,255,.28))
+    drop-shadow(0 2px 12px rgba(255,226,255,.22));
+
+  paint-order: stroke fill;
+}
+
+.lumiSignature__i {
+  position: relative;
+  display: inline-block;
+}
+
+.lumiSignature__spark {
+  position: absolute;
+  right: -.55rem;
+  top: -.42rem;
+
+  width: .58rem;
+  height: .58rem;
+
+  border-radius: 38%;
+
+  background: #ffe58d;
+  border:
+    1.5px solid
+    rgba(255,255,255,.96);
+
+  box-shadow:
+    0 0 7px rgba(255,229,141,.72);
+
+  transform: rotate(45deg);
+}
+
+.lumiSignature__descriptor {
+  margin-top: -.08rem;
+
+  font-family: var(--lumi-font-text, "Poppins", sans-serif);
+  font-size: .56rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: .26em;
+
+  color: rgba(255,255,255,.92);
+}
+
+/*==================================================
+    RESPONSIVE
+==================================================*/
+
+@media (max-width: 360px) {
+  #intro {
+    padding-inline: var(--space-md);
+  }
+
+  .introCard {
+    padding-inline: 1.2rem;
+  }
+
+  .lumiSignature__descriptor {
+    letter-spacing: .3em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .introButton {
+    transition: none;
+  }
+
+  .introButton::before {
+    display: none;
+  }
+}
+
+/*==================================================
+    LUMI INTRO PORTAL — ALPHA 45
+==================================================*/
+
+/*
+  El fondo permanece ligeramente desenfocado mientras
+  la bienvenida está activa y recupera nitidez al abrirse.
+*/
+#backgroundImage {
+  transition:
+    filter 900ms cubic-bezier(.22,1,.36,1),
+    transform 900ms cubic-bezier(.22,1,.36,1);
+}
+
+body.intro-active #backgroundImage {
+  filter:
+    blur(7px)
+    saturate(.92)
+    brightness(.96);
+
+  transform:
+    translateZ(0)
+    scale(1.045);
+}
+
+body.intro-opening #backgroundImage,
+body.invitation-open #backgroundImage {
+  filter:
+    blur(0)
+    saturate(1)
+    brightness(1);
+
+  transform:
+    translateZ(0)
+    scale(1);
+}
+
+/*
+  El contenido y las hojas del portal son capas separadas.
+*/
+.introCard__content {
+  position: relative;
+  z-index: 3;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.introPortal {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  overflow: visible;
+
+  border-radius: inherit;
+
+  pointer-events: none;
+}
+
+/*
+  Las hojas reproducen el acabado de cristal de la tarjeta.
+  Permanecen ocultas visualmente en reposo porque la tarjeta
+  original está debajo; aparecen durante la apertura.
+*/
+.introPortal__door {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  width: calc(50% + 1px);
+
+  border:
+    1px solid
+    rgba(255,255,255,.78);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.86),
+      rgba(255,255,255,.58)
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.98),
+    0 20px 42px rgba(74,38,112,.18);
+
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.introPortal__door--left {
+  left: 0;
+
+  border-radius:
+    inherit
+    0
+    0
+    inherit;
+
+  transform-origin: right center;
+}
+
+.introPortal__door--right {
+  right: 0;
+
+  border-radius:
+    0
+    inherit
+    inherit
+    0;
+
+  transform-origin: left center;
+}
+
+/* Línea de luz central. */
+.introPortal__light {
+  position: absolute;
+  left: 50%;
+  top: 9%;
+  bottom: 9%;
+  z-index: 4;
+
+  width: 3px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(255,255,255,.98) 22%,
+      rgba(255,229,158,.98) 50%,
+      rgba(225,202,255,.95) 78%,
+      transparent
+    );
+
+  box-shadow:
+    0 0 8px rgba(255,255,255,.96),
+    0 0 18px rgba(255,229,158,.74),
+    0 0 34px rgba(195,148,255,.58);
+
+  opacity: 0;
+  transform:
+    translateX(-50%)
+    scaleY(.08);
+
+  transform-origin: center;
+}
+
+/* Pequeños destellos liberados al abrir la tarjeta. */
+.introPortal__spark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 5;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 38%;
+
+  background: #ffe58d;
+  border:
+    1.5px solid
+    rgba(255,255,255,.94);
+
+  box-shadow:
+    0 0 8px rgba(255,229,141,.74);
+
+  opacity: 0;
+
+  transform:
+    translate(-50%,-50%)
+    rotate(45deg)
+    scale(.35);
+}
+
+.introPortal__spark--2,
+.introPortal__spark--5 {
+  background: #d8b8ff;
+}
+
+.introPortal__spark--3,
+.introPortal__spark--6 {
+  background: #bceeff;
+}
+
+#intro.is-opening {
+  pointer-events: none;
+}
+
+#intro.is-opening .introCard {
+  animation:
+    introPortalBreath
+    180ms
+    ease-out
+    both;
+}
+
+#intro.is-opening .introCard__content {
+  animation:
+    introContentRetreat
+    360ms
+    ease
+    both;
+}
+
+#intro.is-opening .lumiSignature {
+  animation:
+    lumiSignatureFarewell
+    520ms
+    ease
+    80ms
+    both;
+}
+
+#intro.is-opening .introPortal__door {
+  opacity: 1;
+}
+
+#intro.is-opening .introPortal__door--left {
+  animation:
+    introDoorLeft
+    760ms
+    cubic-bezier(.22,1,.36,1)
+    170ms
+    both;
+}
+
+#intro.is-opening .introPortal__door--right {
+  animation:
+    introDoorRight
+    760ms
+    cubic-bezier(.22,1,.36,1)
+    170ms
+    both;
+}
+
+#intro.is-opening .introPortal__light {
+  animation:
+    introPortalLight
+    620ms
+    ease
+    80ms
+    both;
+}
+
+#intro.is-opening .introPortal__spark--1 {
+  --spark-x: -104px;
+  --spark-y: -54px;
+  animation-delay: 340ms;
+}
+
+#intro.is-opening .introPortal__spark--2 {
+  --spark-x: 92px;
+  --spark-y: -66px;
+  animation-delay: 370ms;
+}
+
+#intro.is-opening .introPortal__spark--3 {
+  --spark-x: -122px;
+  --spark-y: 32px;
+  animation-delay: 405ms;
+}
+
+#intro.is-opening .introPortal__spark--4 {
+  --spark-x: 116px;
+  --spark-y: 28px;
+  animation-delay: 430ms;
+}
+
+#intro.is-opening .introPortal__spark--5 {
+  --spark-x: -70px;
+  --spark-y: 78px;
+  animation-delay: 455ms;
+}
+
+#intro.is-opening .introPortal__spark--6 {
+  --spark-x: 74px;
+  --spark-y: 74px;
+  animation-delay: 475ms;
+}
+
+#intro.is-opening .introPortal__spark {
+  animation-name: introPortalSpark;
+  animation-duration: 520ms;
+  animation-timing-function: cubic-bezier(.18,.8,.32,1);
+  animation-fill-mode: both;
+}
+
+.introButton.is-pressed {
+  transform:
+    translateY(1px)
+    scale(.97);
+
+  filter:
+    brightness(1.08);
+}
+
+/*
+  Durante la apertura la tarjeta base deja de verse para
+  que solamente permanezcan las dos hojas animadas.
+*/
+#intro.is-opening .introCard {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+#intro.is-opening .introCard::before,
+#intro.is-opening .introCard::after {
+  opacity: 0;
+}
+
+@media (max-width: 420px) {
+  .introPortal__spark {
+    width: 7px;
+    height: 7px;
+  }
+
+  #intro.is-opening .introPortal__spark--1 {
+    --spark-x: -82px;
+  }
+
+  #intro.is-opening .introPortal__spark--2 {
+    --spark-x: 78px;
+  }
+
+  #intro.is-opening .introPortal__spark--3 {
+    --spark-x: -91px;
+  }
+
+  #intro.is-opening .introPortal__spark--4 {
+    --spark-x: 88px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.intro-active #backgroundImage {
+    filter: none;
+    transform: translateZ(0);
+  }
+
+  #intro.is-opening .introPortal__door,
+  #intro.is-opening .introPortal__light,
+  #intro.is-opening .introPortal__spark,
+  #intro.is-opening .introCard,
+  #intro.is-opening .introCard__content,
+  #intro.is-opening .lumiSignature {
+    animation: none !important;
+  }
+
+  #intro.is-opening {
+    opacity: 0;
+  }
+}
+

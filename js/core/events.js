@@ -1,56 +1,11 @@
-/*==================================================
-    LUMI INVITATIONS FRAMEWORK
-    EVENT BUS
-==================================================*/
-
-const Events = {
-
-    eventos:{},
-
-    on(nombre, callback){
-
-        if(!this.eventos[nombre]){
-
-            this.eventos[nombre] = [];
-
-        }
-
-        this.eventos[nombre].push(callback);
-
-    },
-
-
-    off(nombre, callback){
-
-        if(!this.eventos[nombre]){
-
-            return;
-
-        }
-
-        this.eventos[nombre] =
-            this.eventos[nombre]
-                .filter(fn => fn !== callback);
-
-    },
-
-
-    emit(nombre, datos = {}){
-
-        if(!this.eventos[nombre]){
-
-            return;
-
-        }
-
-        this.eventos[nombre]
-            .forEach(callback => callback(datos));
-
-    }
-
-};
-
-Lumi.registrar(
-    "Events",
-    Events
-);
+Lumi.register("Events", {
+  listeners: new Map(),
+  on(name, callback) {
+    const callbacks = this.listeners.get(name) ?? new Set();
+    callbacks.add(callback);
+    this.listeners.set(name, callbacks);
+    return () => this.off(name, callback);
+  },
+  off(name, callback) { this.listeners.get(name)?.delete(callback); },
+  emit(name, detail = {}) { this.listeners.get(name)?.forEach(callback => callback(detail)); }
+});

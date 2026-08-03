@@ -1,0 +1,523 @@
+/*==================================================
+    LUMI HEADER V1.0 — PULIDO FINAL ALPHA 33
+==================================================*/
+
+.lumiHeader {
+  position: relative;
+  isolation: isolate;
+  container-type: inline-size;
+  z-index: 7;
+
+  width: 100%;
+  min-width: 0;
+  padding: clamp(.35rem, 1.2cqw, .6rem) 0 var(--lumi-space-3);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+/*==================================================
+    NOMBRE
+==================================================*/
+
+.lumiHeader__name {
+  position: relative;
+  z-index: 9;
+  top: clamp(-.5rem, -1.4cqw, -.35rem);
+
+  width: 96%;
+  max-width: none;
+  min-height: 1em;
+  margin: 0 auto;
+
+  font-family: var(--lumi-font-display);
+  font-size: clamp(4.15rem, 26.5cqw, 7.2rem);
+  font-weight: 400;
+  line-height: .82;
+  letter-spacing: -.045em;
+  white-space: nowrap;
+
+  color: var(--lumi-name-color);
+  -webkit-text-stroke:
+    var(--lumi-name-stroke-width)
+    var(--lumi-name-stroke);
+  paint-order: stroke fill;
+
+  text-shadow:
+    0 3px 0 rgba(76, 34, 111, .18),
+    0 7px 14px rgba(115, 62, 159, .20);
+}
+
+/*==================================================
+    BLOQUE DE CELEBRACIÓN
+==================================================*/
+
+.lumiHeader__celebration {
+  position: relative;
+  z-index: 8;
+
+  width: min(94%, 410px);
+  margin-top: clamp(-.12rem, -.25cqw, 0rem);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+
+  font-family: var(--lumi-font-title);
+}
+
+.lumiHeader__prefix,
+.lumiHeader__suffix {
+  font-size: clamp(1.36rem, 6.7cqw, 2rem);
+  font-weight: 700;
+  line-height: .95;
+
+  -webkit-text-stroke: clamp(2px, .7cqw, 4px) #ffffff;
+  paint-order: stroke fill;
+  text-shadow:
+    0 3px 8px rgba(51, 166, 180, .22),
+    0 0 10px rgba(255, 255, 255, .24);
+}
+
+/* Cumple actúa como marco luminoso superior del número. */
+.lumiHeader__prefix {
+  color: #38d7da;
+}
+
+/* Años cierra el bloque con el mismo aqua, ligeramente más profundo. */
+.lumiHeader__suffix {
+  color: #20bcc5;
+}
+
+/*==================================================
+    CUMPLE + DESTELLOS SVG
+==================================================*/
+
+.lumiHeader__prefixRow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(.18rem, .85cqw, .38rem);
+  margin-bottom: clamp(.08rem, .35cqw, .18rem);
+}
+
+.lumiHeader__prefix {
+  margin: 0;
+}
+
+.lumiHeader__prefixSparkle {
+  width: clamp(1.05rem, 5cqw, 1.55rem);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+
+  filter:
+    drop-shadow(0 0 5px rgba(255, 229, 150, .62))
+    drop-shadow(0 2px 3px rgba(107, 53, 145, .15));
+}
+
+.lumiHeader__prefixSparkle svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.lumiHeader__prefixSparkle--left {
+  transform: rotate(-8deg) scale(.92);
+}
+
+.lumiHeader__prefixSparkle--right {
+  transform: rotate(8deg) scale(.92);
+}
+
+/*==================================================
+    ESCENA DEL NÚMERO
+
+    Esta es la única referencia de posición para todas
+    las decoraciones. Todo parte del centro del número.
+==================================================*/
+
+.lumiHeader__numberScene {
+  position: relative;
+  isolation: isolate;
+
+  width: clamp(8.9rem, 43cqw, 13rem);
+  height: clamp(7.1rem, 35cqw, 10.6rem);
+  margin-inline: auto;
+
+  display: grid;
+  place-items: center;
+}
+
+.lumiHeader__number {
+  position: relative;
+  isolation: isolate;
+  z-index: 3;
+
+  width: 1.08em;
+  height: .89em;
+  margin: 0;
+
+  display: inline-grid;
+  place-items: center;
+
+  font-family: var(--lumi-font-title);
+  font-size: clamp(6.25rem, 35cqw, 10.2rem);
+  font-weight: 900;
+  line-height: .76;
+
+  filter:
+    drop-shadow(0 7px 6px rgba(111, 48, 159, .22))
+    drop-shadow(0 0 5px rgba(111, 48, 159, .28));
+}
+
+.lumiHeader__numberLayer {
+  position: absolute;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+
+  pointer-events: none;
+}
+
+.lumiHeader__numberLayer--purple {
+  z-index: 1;
+  color: var(--lumi-name-stroke);
+  -webkit-text-fill-color: var(--lumi-name-stroke);
+  -webkit-text-stroke:
+    clamp(11px, 2.35cqw, 12px)
+    var(--lumi-name-stroke);
+  paint-order: stroke fill;
+}
+
+.lumiHeader__numberLayer--white {
+  z-index: 2;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+  -webkit-text-stroke: clamp(4px, 1.15cqw, 6px) #ffffff;
+  paint-order: stroke fill;
+}
+
+.lumiHeader__numberLayer--fill {
+  z-index: 3;
+  color: transparent;
+  background: linear-gradient(
+    180deg,
+    #ffb7db 0%,
+    #ff86c3 20%,
+    #ff4fa5 50%,
+    #e92a89 78%,
+    #bd1769 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.lumiHeader__numberLayer--shine {
+  z-index: 4;
+  color: transparent;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.82) 3%,
+    rgba(255,255,255,.32) 17%,
+    rgba(255,255,255,0) 37%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: .66;
+}
+
+/*==================================================
+    DECORACIONES ANCLADAS AL CENTRO DEL 5
+==================================================*/
+
+.lumiHeader__ageDecor {
+  --decor-x: 0px;
+  --decor-y: 0px;
+  --decor-rotate: 0deg;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 4;
+
+  width: clamp(1.35rem, 6.8cqw, 2.2rem);
+  aspect-ratio: 1;
+
+  display: grid;
+  place-items: center;
+
+  transform:
+    translate(-50%, -50%)
+    translate(var(--decor-x), var(--decor-y))
+    rotate(var(--decor-rotate));
+
+  pointer-events: none;
+  filter:
+    drop-shadow(0 3px 4px rgba(84, 38, 128, .20))
+    drop-shadow(0 0 7px rgba(255, 255, 255, .48));
+}
+
+.lumiHeader__ageDecor svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Óvalo compacto alrededor del número */
+.lumiHeader__ageDecor--heartOne {
+  --decor-x: clamp(-3.25rem, -12.2cqw, -2.3rem);
+  --decor-y: clamp(-2.6rem, -9.5cqw, -1.8rem);
+  --decor-rotate: -10deg;
+}
+
+.lumiHeader__ageDecor--starOne {
+  --decor-x: clamp(2.08rem, 9.8cqw, 2.8rem);
+  --decor-y: clamp(-2.45rem, -8.8cqw, -1.7rem);
+  --decor-rotate: 9deg;
+  width: clamp(1.12rem, 5.6cqw, 1.78rem);
+}
+
+.lumiHeader__ageDecor--pawOne {
+  --decor-x: clamp(-3.4rem, -12.8cqw, -2.4rem);
+  --decor-y: clamp(-.55rem, -1.5cqw, -.15rem);
+  --decor-rotate: -12deg;
+  width: clamp(1.48rem, 7.4cqw, 2.38rem);
+}
+
+.lumiHeader__ageDecor--heartTwo {
+  --decor-x: clamp(2.35rem, 11.2cqw, 3.2rem);
+  --decor-y: clamp(-.1rem, .5cqw, .35rem);
+  --decor-rotate: 11deg;
+  width: clamp(1.18rem, 5.9cqw, 1.88rem);
+}
+
+.lumiHeader__ageDecor--starTwo {
+  --decor-x: clamp(-2.9rem, -10.6cqw, -2.05rem);
+  --decor-y: clamp(1.75rem, 7.5cqw, 2.45rem);
+  --decor-rotate: -8deg;
+  width: clamp(1rem, 5cqw, 1.58rem);
+}
+
+.lumiHeader__ageDecor--pawTwo {
+  --decor-x: clamp(2.08rem, 9.8cqw, 2.8rem);
+  --decor-y: clamp(1.75rem, 7.6cqw, 2.5rem);
+  --decor-rotate: 10deg;
+  width: clamp(1.3rem, 6.5cqw, 2.08rem);
+}
+
+.lumiHeader__suffix {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: clamp(-.3rem, -1.1cqw, -.12rem);
+}
+
+/*==================================================
+    ANIMACIONES
+==================================================*/
+
+#invitation.is-visible .lumiHeader__name,
+#invitation.is-visible .lumiHeader__prefixRow,
+#invitation.is-visible .lumiHeader__numberScene,
+#invitation.is-visible .lumiHeader__suffix {
+  animation-duration: var(--lumi-duration-slow);
+  animation-timing-function: var(--lumi-ease-standard);
+  animation-fill-mode: both;
+}
+
+#invitation.is-visible .lumiHeader__name {
+  animation-name: lumiHeaderFadeDown;
+  animation-delay: 70ms;
+}
+
+#invitation.is-visible .lumiHeader__prefixRow {
+  animation-name: lumiHeaderFadeUp;
+  animation-delay: 180ms;
+}
+
+#invitation.is-visible .lumiHeader__numberScene {
+  animation-name: lumiHeaderNumberPop;
+  animation-delay: 250ms;
+}
+
+#invitation.is-visible .lumiHeader__suffix {
+  animation-name: lumiHeaderFadeUp;
+  animation-delay: 330ms;
+}
+
+#invitation.is-visible .lumiHeader__ageDecor {
+  animation: lumiAgeDecorIn 620ms var(--lumi-ease-standard) both;
+}
+
+#invitation.is-visible .lumiHeader__ageDecor--heartOne { animation-delay: 310ms; }
+#invitation.is-visible .lumiHeader__ageDecor--starOne  { animation-delay: 350ms; }
+#invitation.is-visible .lumiHeader__ageDecor--pawOne   { animation-delay: 390ms; }
+#invitation.is-visible .lumiHeader__ageDecor--heartTwo { animation-delay: 430ms; }
+#invitation.is-visible .lumiHeader__ageDecor--starTwo  { animation-delay: 470ms; }
+#invitation.is-visible .lumiHeader__ageDecor--pawTwo   { animation-delay: 510ms; }
+
+#invitation.is-visible .lumiHeader__prefixSparkle {
+  animation: lumiPrefixSparkleIn 560ms var(--lumi-ease-standard) both;
+}
+
+#invitation.is-visible .lumiHeader__prefixSparkle--left { animation-delay: 155ms; }
+#invitation.is-visible .lumiHeader__prefixSparkle--right { animation-delay: 205ms; }
+
+@keyframes lumiHeaderFadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lumiHeaderFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lumiHeaderNumberPop {
+  0% {
+    opacity: 0;
+    transform: scale(.72) translateY(10px);
+  }
+  66% {
+    opacity: 1;
+    transform: scale(1.08) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes lumiAgeDecorIn {
+  from {
+    opacity: 0;
+    scale: .68;
+  }
+  70% {
+    opacity: 1;
+    scale: 1.08;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes lumiPrefixSparkleIn {
+  from {
+    opacity: 0;
+    scale: .6;
+  }
+  70% {
+    opacity: 1;
+    scale: 1.08;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+/*==================================================
+    RESPONSIVE
+==================================================*/
+
+@container (max-width: 420px) {
+  .lumiHeader__name {
+    width: 96%;
+    font-size: clamp(3.85rem, 26cqw, 6.35rem);
+    letter-spacing: -.05em;
+  }
+
+  .lumiHeader__celebration {
+    width: 96%;
+    max-width: none;
+  }
+
+  .lumiHeader__prefix,
+  .lumiHeader__suffix {
+    font-size: clamp(1.3rem, 6.7cqw, 1.85rem);
+  }
+
+  .lumiHeader__numberScene {
+    width: clamp(8.25rem, 44cqw, 11.6rem);
+    height: clamp(6.65rem, 35cqw, 9.6rem);
+  }
+
+  .lumiHeader__number {
+    font-size: clamp(5.9rem, 35cqw, 9.1rem);
+  }
+
+  .lumiHeader__prefixRow {
+    gap: clamp(.16rem, .75cqw, .32rem);
+  }
+
+  .lumiHeader__prefixSparkle {
+    width: clamp(.95rem, 4.8cqw, 1.35rem);
+  }
+}
+
+@container (max-width: 300px) {
+  .lumiHeader__name {
+    width: 97%;
+    font-size: clamp(3.4rem, 25.5cqw, 5.4rem);
+    letter-spacing: -.055em;
+  }
+
+  .lumiHeader__number {
+    font-size: clamp(5.35rem, 34cqw, 8rem);
+  }
+}
+
+@media (max-width: 360px) {
+  .lumiHeader {
+    padding-inline: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumiHeader__name,
+  .lumiHeader__prefixRow,
+  .lumiHeader__prefixSparkle,
+  .lumiHeader__numberScene,
+  .lumiHeader__ageDecor,
+  .lumiHeader__suffix {
+    opacity: 1;
+    animation: none !important;
+    scale: 1;
+  }
+}
+
+/* Decoraciones antiguas desactivadas: ahora todo vive en numberScene. */
+.lumiHeader__sparkle--top,
+.lumiHeader__decoration {
+  display: none;
+}

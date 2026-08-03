@@ -1,62 +1,13 @@
-/*==================================================
-    LUMI INVITATIONS FRAMEWORK
-    COMPONENT REGISTRY
-==================================================*/
-
-const Registry = {
-
-    componentes:{},
-
-
-    registrar(nombre, configuracion){
-
-        if(!nombre){
-
-            console.error(
-                "No se puede registrar un componente sin nombre."
-            );
-
-            return;
-
-        }
-
-        if(
-            !configuracion ||
-            typeof configuracion.render !== "function"
-        ){
-
-            console.error(
-                `El componente '${nombre}' no tiene una función render válida.`
-            );
-
-            return;
-
-        }
-
-        this.componentes[nombre] =
-            configuracion;
-
-    },
-
-
-    obtener(nombre){
-
-        return this.componentes[nombre];
-
-    },
-
-
-    existe(nombre){
-
-        return Boolean(
-            this.componentes[nombre]
-        );
-
-    }
-
-};
-
-Lumi.registrar(
-    "Registry",
-    Registry
-);
+Lumi.register("Registry", {
+  components: new Map(),
+  register(name, render) {
+    if (!name || typeof render !== "function") throw new Error("Componente inválido.");
+    if (this.components.has(name)) throw new Error(`Componente duplicado: ${name}`);
+    this.components.set(name, render);
+  },
+  render(name) {
+    const renderer = this.components.get(name);
+    if (!renderer) throw new Error(`Componente no registrado: ${name}`);
+    renderer();
+  }
+});

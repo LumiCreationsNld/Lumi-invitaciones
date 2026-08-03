@@ -1,0 +1,361 @@
+/*==================================================
+    LUMI CARDS V1.0
+
+    Jerarquía visual:
+    1. Icono temático pequeño.
+    2. Título decorativo.
+    3. Divisor Lumi.
+    4. Información grande y legible.
+==================================================*/
+
+.lumiCards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--lumi-space-3);
+}
+
+.lumiCard {
+  --lumi-card-color: var(--lumi-color-secondary);
+  --lumi-card-color-soft: rgba(255, 93, 177, .16);
+
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  min-height: 172px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding:
+    clamp(.48rem, 2cqw, .68rem)
+    clamp(.72rem, 3.2cqw, 1rem)
+    clamp(.78rem, 3.4cqw, 1.05rem);
+
+  text-align: center;
+
+  border: var(--lumi-glass-border);
+  border-radius: var(--lumi-radius-lg);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, .78),
+      rgba(255, 255, 255, .38)
+    );
+
+  box-shadow:
+    var(--lumi-shadow-card),
+    0 0 0 1px var(--lumi-card-color-soft);
+
+  -webkit-backdrop-filter: blur(var(--lumi-glass-blur));
+  backdrop-filter: blur(var(--lumi-glass-blur));
+
+  transition:
+    transform var(--lumi-duration-fast) var(--lumi-ease-standard),
+    box-shadow var(--lumi-duration-fast) var(--lumi-ease-standard);
+}
+
+/* Brillo superior del cristal. */
+.lumiCard::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: 48%;
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, .58),
+      rgba(255, 255, 255, 0)
+    );
+
+  pointer-events: none;
+}
+
+/* Mancha pastel muy suave que identifica cada tarjeta. */
+.lumiCard::after {
+  content: "";
+  position: absolute;
+  right: -36px;
+  bottom: -44px;
+  z-index: -2;
+
+  width: 110px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+
+  background: var(--lumi-card-color-soft);
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+.lumiCard--featured {
+  grid-column: 1 / -1;
+  min-height: 154px;
+}
+
+/*==============================================
+    COLORES POR TIPO DE INFORMACIÓN
+==============================================*/
+
+.lumiCard--date {
+  --lumi-card-color: #ff64ad;
+  --lumi-card-color-soft: rgba(255, 100, 173, .18);
+}
+
+.lumiCard--time {
+  --lumi-card-color: #9870ea;
+  --lumi-card-color-soft: rgba(152, 112, 234, .18);
+}
+
+.lumiCard--place {
+  --lumi-card-color: #55bfe8;
+  --lumi-card-color-soft: rgba(85, 191, 232, .18);
+}
+
+.lumiCard--address {
+  --lumi-card-color: #52c9a8;
+  --lumi-card-color-soft: rgba(82, 201, 168, .18);
+}
+
+.lumiCard--notice {
+  --lumi-card-color: #f4b94e;
+  --lumi-card-color-soft: rgba(244, 185, 78, .20);
+}
+
+/*==============================================
+    ICONO
+==============================================*/
+
+.lumiCard__icon {
+  flex: 0 0 auto;
+
+  width: clamp(28px, 7.6cqw, 34px);
+  height: clamp(28px, 7.6cqw, 34px);
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: clamp(.18rem, .8cqw, .3rem);
+
+  border: 1px solid rgba(255, 255, 255, .84);
+  border-radius: 50%;
+
+  color: var(--lumi-card-color);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, .92),
+      rgba(255, 255, 255, .55)
+    );
+
+  box-shadow:
+    0 7px 16px var(--lumi-card-color-soft),
+    inset 0 1px 0 rgba(255, 255, 255, .96);
+}
+
+.lumiCard__icon svg {
+  width: 56%;
+  height: 56%;
+  overflow: visible;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/*==============================================
+    TÍTULO
+==============================================*/
+
+.lumiCard__title {
+  margin: 0;
+
+  font-family: var(--lumi-font-title);
+  font-size: clamp(1.08rem, 5cqw, 1.4rem);
+  font-weight: 700;
+  line-height: .96;
+
+  color: var(--lumi-card-color);
+  letter-spacing: .005em;
+
+  /* Delineado blanco real, no sombra blanca. */
+  -webkit-text-stroke: clamp(1.5px, .48cqw, 2.5px) #ffffff;
+  paint-order: stroke fill;
+
+  text-shadow:
+    0 4px 10px var(--lumi-card-color-soft);
+}
+
+/*==============================================
+    DIVISOR LUMI
+==============================================*/
+
+.lumiCard__divider {
+  width: min(82%, 118px);
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: .38rem;
+
+  margin:
+    clamp(.28rem, 1.2cqw, .42rem)
+    auto
+    clamp(.3rem, 1.3cqw, .48rem);
+
+  color: var(--lumi-card-color);
+}
+
+.lumiCard__divider span {
+  height: 2px;
+  border-radius: var(--lumi-radius-pill);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--lumi-card-color)
+    );
+
+  opacity: .58;
+}
+
+.lumiCard__divider span:last-child {
+  transform: scaleX(-1);
+}
+
+.lumiCard__divider i {
+  font-style: normal;
+  font-size: .62rem;
+  line-height: 1;
+
+  text-shadow:
+    0 0 8px var(--lumi-card-color-soft);
+}
+
+/*==============================================
+    INFORMACIÓN PRINCIPAL
+==============================================*/
+
+.lumiCard__value {
+  width: 100%;
+  min-height: 0;
+  margin: 0;
+  flex: 1 1 auto;
+
+  display: grid;
+  place-items: center;
+
+  font-family: var(--lumi-font-title);
+  font-size: clamp(1.05rem, 4.65cqw, 1.28rem);
+  font-weight: 600;
+  line-height: 1.22;
+
+  /* Morado profundo: alto contraste sin llegar a negro. */
+  color: #3f2b63;
+
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.lumiCard--address .lumiCard__value {
+  font-size: clamp(.98rem, 4.2cqw, 1.16rem);
+  line-height: 1.2;
+}
+
+.lumiCard--featured .lumiCard__value {
+  max-width: 32ch;
+  font-size: clamp(1.08rem, 4.8cqw, 1.32rem);
+}
+
+/* Destello decorativo discreto. */
+.lumiCard__sparkle {
+  position: absolute;
+  top: .72rem;
+  right: .8rem;
+
+  color: var(--lumi-card-color);
+  font-size: .62rem;
+  line-height: 1;
+  opacity: .28;
+
+  text-shadow:
+    0 0 8px var(--lumi-card-color-soft);
+
+  pointer-events: none;
+}
+
+/*==============================================
+    INTERACCIÓN Y ENTRADA
+==============================================*/
+
+@media (hover: hover) {
+  .lumiCard:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 20px 42px rgba(103, 69, 145, .22),
+      var(--lumi-glass-highlight),
+      0 0 0 1px var(--lumi-card-color-soft);
+  }
+}
+
+#invitation.is-visible .lumiCard {
+  animation:
+    lumiCardEntrance
+    var(--lumi-duration-entry)
+    var(--lumi-ease-standard)
+    both;
+
+  animation-delay:
+    calc(var(--lumi-card-index, 0) * 90ms + 360ms);
+}
+
+@keyframes lumiCardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/*==============================================
+    RESPONSIVE
+==============================================*/
+
+@media (max-width: 360px) {
+  .lumiCards {
+    grid-template-columns: 1fr;
+  }
+
+  .lumiCard,
+  .lumiCard--featured {
+    grid-column: auto;
+    min-height: 150px;
+  }
+
+  .lumiCard__value {
+    max-width: 29ch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumiCard {
+    opacity: 1;
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

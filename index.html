@@ -1,152 +1,211 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#8b5cf6">
+  <title>✨ Eliette | Has recibido una invitación muy especial</title>
 
-    <meta charset="UTF-8">
+  <!-- LUMI SOCIAL PREVIEW -->
+  <meta name="description" content="Has recibido una invitación muy especial">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Lumi Creations">
+  <meta property="og:title" content="✨ Has recibido una invitación muy especial">
+  <meta property="og:url" content="https://lumicreationsnld.github.io/Lumi-invitaciones/">
+  <meta property="og:image" content="https://lumicreationsnld.github.io/Lumi-invitaciones/assets/social/lumi-cover.png">
+  <meta property="og:image:secure_url" content="https://lumicreationsnld.github.io/Lumi-invitaciones/assets/social/lumi-cover.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Has recibido una invitación muy especial">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="✨ Has recibido una invitación muy especial">
+  <meta name="twitter:image" content="https://lumicreationsnld.github.io/Lumi-invitaciones/assets/social/lumi-cover.png">
 
-    <title>Lumi Invitations Framework</title>
+  <link rel="icon" type="image/png" href="https://lumicreationsnld.github.io/Lumi-invitaciones/assets/branding/favicon.png">
+  <link rel="apple-touch-icon" href="https://lumicreationsnld.github.io/Lumi-invitaciones/assets/branding/apple-touch-icon.png">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@400;500;600;700;800&family=Cookie&display=swap" rel="stylesheet">
 
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <!-- CSS -->
-
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/templates/classic.css">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/responsive.css">
-
-    <link
-    rel="icon"
-    type="image/png"
-    href="assets/icons/favicon.png"
->
-
+  <link rel="stylesheet" href="css/base/tokens.css">
+  <link rel="stylesheet" href="css/base/typography.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/components/lumi-intro.css">
+  <link rel="stylesheet" href="css/components/lumi-header.css">
+  <link rel="stylesheet" href="css/components/lumi-card.css">
+  <link rel="stylesheet" href="css/components/lumi-button.css">
+  <link rel="stylesheet" href="css/components/lumi-countdown.css">
+  <link rel="stylesheet" href="css/components/lumi-frame.css">
+  <link rel="stylesheet" href="css/components/lumi-atmosphere.css">
+  <link rel="stylesheet" href="css/components/lumi-music.css">
+  <link rel="stylesheet" href="css/components/lumi-magic.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
-
 <body>
+  <div id="background" aria-hidden="true">
+    <div id="backgroundImage"></div>
+    <div id="backgroundOverlay"></div>
+    <div id="particles"></div>
+  </div>
 
-<!--======================================
-            INTRO
-=======================================-->
+  <section id="intro" aria-labelledby="introTitle">
+    <div class="lumiIntro">
+      <div class="introCard">
+        <div class="introCard__content">
+          <span class="introSpark introSpark--top" aria-hidden="true">
+            <svg viewBox="0 0 48 48" focusable="false">
+              <path d="M24 3 C25.5 14 30 20 41 24 C30 27.5 25.5 34 24 45 C22.5 34 18 27.5 7 24 C18 20 22.5 14 24 3 Z"/>
+            </svg>
+          </span>
 
-<section id="intro">
+          <h1 id="introTitle"></h1>
+          <p id="introSubtitle"></p>
 
-    <div class="introCard">
+          <button id="btnOpen" class="introButton" type="button">
+            <span class="introButton__spark" aria-hidden="true">
+              <svg viewBox="0 0 32 32" focusable="false">
+                <path d="M16 2 C17 9 20 13 27 16 C20 18.5 17 23 16 30 C15 23 12 18.5 5 16 C12 13 15 9 16 2 Z"/>
+              </svg>
+            </span>
+            <span class="introButton__label"></span>
+          </button>
+        </div>
 
-        <img id="introLogo">
+        <div class="introPortal" aria-hidden="true">
+          <span class="introPortal__door introPortal__door--left"></span>
+          <span class="introPortal__door introPortal__door--right"></span>
+          <span class="introPortal__light"></span>
 
-        <h1 id="introTitle"></h1>
+          <span class="introPortal__spark introPortal__spark--1"></span>
+          <span class="introPortal__spark introPortal__spark--2"></span>
+          <span class="introPortal__spark introPortal__spark--3"></span>
+          <span class="introPortal__spark introPortal__spark--4"></span>
+          <span class="introPortal__spark introPortal__spark--5"></span>
+          <span class="introPortal__spark introPortal__spark--6"></span>
+        </div>
+      </div>
 
-        <p id="introSubtitle"></p>
+      <div class="lumiSignature" aria-label="Creado por Lumi Creations">
+        <span class="lumiSignature__word">
+          Lum<span class="lumiSignature__i">i
+            <span class="lumiSignature__spark" aria-hidden="true"></span>
+          </span>
+        </span>
+        <span class="lumiSignature__descriptor">CREATIONS</span>
+      </div>
+    </div>
+  </section>
 
-        <button id="btnOpen"></button>
-
+  <main id="invitation" hidden>
+    <div class="lumiAtmosphere" aria-hidden="true">
+      <span class="lumiAtmosphere__glow lumiAtmosphere__glow--header"></span>
+      <span class="lumiAtmosphere__glow lumiAtmosphere__glow--content"></span>
     </div>
 
-</section>
+    <div id="lumiMagic" class="lumiMagic" aria-hidden="true">
+      <span class="lumiMagic__particle lumiMagic__particle--a"></span>
+      <span class="lumiMagic__particle lumiMagic__particle--b"></span>
+      <span class="lumiMagic__particle lumiMagic__particle--c"></span>
+    </div>
 
-<!--======================================
-            BACKGROUND
-=======================================-->
+    <div id="lumiFrame" class="lumiFrame" aria-hidden="true">
+      <div class="lumiFrame__roof">
+        <svg viewBox="0 0 400 96" preserveAspectRatio="none" focusable="false">
+          <path class="lumiFrame__roofGlow" d="M18 91 C31 90 42 86 54 78 L50 20 L82 46 C126 43 161 27 200 20 C239 27 274 43 318 46 L350 20 L346 78 C358 86 369 90 382 91"/>
+          <path class="lumiFrame__roofOuter" d="M18 91 C31 90 42 86 54 78 L50 20 L82 46 C126 43 161 27 200 20 C239 27 274 43 318 46 L350 20 L346 78 C358 86 369 90 382 91"/>
+          <path class="lumiFrame__roofWhite" d="M18 91 C31 90 42 86 54 78 L50 20 L82 46 C126 43 161 27 200 20 C239 27 274 43 318 46 L350 20 L346 78 C358 86 369 90 382 91"/>
+          <path class="lumiFrame__roofPink" d="M18 91 C31 90 42 86 54 78 L50 20 L82 46 C126 43 161 27 200 20 C239 27 274 43 318 46 L350 20 L346 78 C358 86 369 90 382 91"/>
+        </svg>
 
-<div id="background">
+        <svg class="lumiFrame__heart" viewBox="0 0 64 58" focusable="false">
+          <path d="M32 54 C26 46 6 35 6 18 C6 8 13 3 21 3 C27 3 31 7 32 12 C34 7 38 3 44 3 C52 3 59 8 59 18 C59 35 39 46 32 54 Z"/>
+        </svg>
+      </div>
 
-    <div id="backgroundImage"></div>
+      <div class="lumiFrame__body"></div>
 
-    <div id="backgroundOverlay"></div>
+      <div class="lumiFrame__ornaments">
+        <svg class="lumiFrame__ornament lumiFrame__ornament--star star--yellow" viewBox="0 0 50 50"><path d="M25 3 L31 18 L47 19 L35 29 L39 45 L25 36 L11 45 L15 29 L3 19 L19 18 Z"/></svg>
+        <svg class="lumiFrame__ornament lumiFrame__ornament--star star--aqua" viewBox="0 0 50 50"><path d="M25 3 L31 18 L47 19 L35 29 L39 45 L25 36 L11 45 L15 29 L3 19 L19 18 Z"/></svg>
+        <svg class="lumiFrame__ornament lumiFrame__ornament--star star--pink" viewBox="0 0 50 50"><path d="M25 3 L31 18 L47 19 L35 29 L39 45 L25 36 L11 45 L15 29 L3 19 L19 18 Z"/></svg>
+        <svg class="lumiFrame__ornament lumiFrame__ornament--heart heart--pink" viewBox="0 0 50 46"><path d="M25 43 C20 36 4 28 4 14 C4 6 10 2 17 2 C22 2 25 6 25 10 C27 6 30 2 35 2 C42 2 48 6 48 14 C48 28 32 36 25 43 Z"/></svg>
+        <svg class="lumiFrame__ornament lumiFrame__ornament--heart heart--purple" viewBox="0 0 50 46"><path d="M25 43 C20 36 4 28 4 14 C4 6 10 2 17 2 C22 2 25 6 25 10 C27 6 30 2 35 2 C42 2 48 6 48 14 C48 28 32 36 25 43 Z"/></svg>
+      </div>
 
-    <div id="particles"></div>
-
-</div>
-
-<!--======================================
-            INVITACIÓN
-=======================================-->
-
-<main id="invitation">
-
-    <img id="frame">
+      <svg class="lumiFrame__paw lumiFrame__paw--topLeft" viewBox="0 0 72 66" focusable="false">
+        <ellipse class="pawToe" cx="14" cy="19" rx="7" ry="9" transform="rotate(-24 14 19)"/><ellipse class="pawToe" cx="30" cy="12" rx="7" ry="9" transform="rotate(-8 30 12)"/><ellipse class="pawToe" cx="47" cy="13" rx="7" ry="9" transform="rotate(9 47 13)"/><ellipse class="pawToe" cx="61" cy="22" rx="7" ry="9" transform="rotate(25 61 22)"/><path class="pawPad" d="M15 48 C14 38 20 29 29 26 C37 23 46 25 53 31 C60 37 62 47 57 54 C52 61 43 60 36 57 C29 61 20 60 16 54 C15 52 15 50 15 48 Z"/>
+      </svg>
+      <svg class="lumiFrame__paw lumiFrame__paw--topRight" viewBox="0 0 72 66" focusable="false">
+        <ellipse class="pawToe" cx="14" cy="19" rx="7" ry="9" transform="rotate(-24 14 19)"/><ellipse class="pawToe" cx="30" cy="12" rx="7" ry="9" transform="rotate(-8 30 12)"/><ellipse class="pawToe" cx="47" cy="13" rx="7" ry="9" transform="rotate(9 47 13)"/><ellipse class="pawToe" cx="61" cy="22" rx="7" ry="9" transform="rotate(25 61 22)"/><path class="pawPad" d="M15 48 C14 38 20 29 29 26 C37 23 46 25 53 31 C60 37 62 47 57 54 C52 61 43 60 36 57 C29 61 20 60 16 54 C15 52 15 50 15 48 Z"/>
+      </svg>
+      <svg class="lumiFrame__paw lumiFrame__paw--bottomLeft" viewBox="0 0 72 66" focusable="false">
+        <ellipse class="pawToe" cx="14" cy="19" rx="7" ry="9" transform="rotate(-24 14 19)"/><ellipse class="pawToe" cx="30" cy="12" rx="7" ry="9" transform="rotate(-8 30 12)"/><ellipse class="pawToe" cx="47" cy="13" rx="7" ry="9" transform="rotate(9 47 13)"/><ellipse class="pawToe" cx="61" cy="22" rx="7" ry="9" transform="rotate(25 61 22)"/><path class="pawPad" d="M15 48 C14 38 20 29 29 26 C37 23 46 25 53 31 C60 37 62 47 57 54 C52 61 43 60 36 57 C29 61 20 60 16 54 C15 52 15 50 15 48 Z"/>
+      </svg>
+      <svg class="lumiFrame__paw lumiFrame__paw--bottomRight" viewBox="0 0 72 66" focusable="false">
+        <ellipse class="pawToe" cx="14" cy="19" rx="7" ry="9" transform="rotate(-24 14 19)"/><ellipse class="pawToe" cx="30" cy="12" rx="7" ry="9" transform="rotate(-8 30 12)"/><ellipse class="pawToe" cx="47" cy="13" rx="7" ry="9" transform="rotate(9 47 13)"/><ellipse class="pawToe" cx="61" cy="22" rx="7" ry="9" transform="rotate(25 61 22)"/><path class="pawPad" d="M15 48 C14 38 20 29 29 26 C37 23 46 25 53 31 C60 37 62 47 57 54 C52 61 43 60 36 57 C29 61 20 60 16 54 C15 52 15 50 15 48 Z"/>
+      </svg>
+    </div>
 
     <section id="content">
-
-        <header id="header"></header>
-
-        <section id="eventInfo"></section>
-
-        <section id="countdown"></section>
-
-        <section id="character"></section>
-
-        <footer id="actions"></footer>
-
+      <header id="header"></header>
+      <section id="eventInfo"></section>
+      <section id="countdown"></section>
+      <section id="character"></section>
+      <footer id="actions"></footer>
     </section>
+  </main>
 
-</main>
+  <button
+    id="musicButton"
+    class="lumiMusic"
+    type="button"
+    hidden
+    aria-label="Reproducir música"
+    aria-pressed="false"
+  >
+    <span class="lumiMusic__glow" aria-hidden="true"></span>
 
-<!--======================================
-            MÚSICA
-=======================================-->
+    <span class="lumiMusic__icon lumiMusic__icon--play" aria-hidden="true">
+      <svg viewBox="0 0 48 48" focusable="false">
+        <path class="lumiMusic__speaker" d="M8 20 H16 L27 11 V37 L16 28 H8 Z"/>
+        <path class="lumiMusic__wave lumiMusic__wave--one" d="M32 19 C35 22 35 26 32 29"/>
+        <path class="lumiMusic__wave lumiMusic__wave--two" d="M36 15 C42 21 42 27 36 33"/>
+      </svg>
+    </span>
 
-<button id="musicButton">
+    <span class="lumiMusic__icon lumiMusic__icon--muted" aria-hidden="true">
+      <svg viewBox="0 0 48 48" focusable="false">
+        <path class="lumiMusic__speaker" d="M8 20 H16 L27 11 V37 L16 28 H8 Z"/>
+        <path class="lumiMusic__muteLine" d="M32 19 L41 28 M41 19 L32 28"/>
+      </svg>
+    </span>
 
-🎵
+    <span class="lumiMusic__spark" aria-hidden="true"></span>
+  </button>
+  <audio id="backgroundMusic" preload="auto" loop playsinline></audio>
 
-</button>
-
-<audio id="backgroundMusic" loop></audio>
-
-<!--======================================
-            JAVASCRIPT
-=======================================-->
-
-<script src="js/config.js"></script>
-
-<script src="js/utils.js"></script>
-<script src="js/theme.js"></script>
-
-<script src="js/core/lumi.js"></script>
-<script src="js/core/events.js"></script>
-
-<script src="js/countdown.js"></script>
-<script src="js/actions.js"></script>
-<script src="js/audio.js"></script>
-<script src="js/intro.js"></script>
-
-<script src="js/core/registry.js"></script>
-<script src="js/core/templateManager.js"></script>
-<script src="js/core/templateEngine.js"></script>
-
-<script src="js/templates/classic/classic.js"></script>
-
-<script src="js/components/header.js"></script>
-<script src="js/components/information.js"></script>
-<script src="js/components/countdown.js"></script>
-<script src="js/components/character.js"></script>
-<script src="js/components/buttons.js"></script>
-
-<script src="js/core/renderer.js"></script>
-
-<script src="js/ui.js"></script>
-<script src="js/main.js"></script>
-
+  <script src="js/config.js"></script>
+  <script src="js/core/lumi.js"></script>
+  <script src="js/core/events.js"></script>
+  <script src="js/core/registry.js"></script>
+  <script src="js/services/assets.js"></script>
+  <script src="js/services/theme.js"></script>
+  <script src="js/services/actions.js"></script>
+  <script src="js/services/audio.js"></script>
+  <script src="js/services/countdown.js"></script>
+  <script src="js/components/header.js"></script>
+  <script src="js/components/information.js"></script>
+  <script src="js/components/countdown.js"></script>
+  <script src="js/components/character.js"></script>
+  <script src="js/components/buttons.js"></script>
+  <script src="js/templates/classic.js"></script>
+  <script src="js/components/magic.js"></script>
+  <script src="js/app.js"></script>
 </body>
-
 </html>

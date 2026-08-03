@@ -1,51 +1,28 @@
-/*==================================================
-    PERSONAJE
-==================================================*/
+Lumi.Registry.register("character", () => {
+  const character = document.getElementById("character");
 
-function crearPersonaje(){
+  if (!character) {
+    console.warn('No se encontró el elemento "#character".');
+    return;
+  }
 
-    const contenedor =
-        document.getElementById("character");
+  const themeName =
+    invitationConfig.theme?.name ||
+    "la invitación";
 
-    if(!contenedor){
-        return;
-    }
+  character.innerHTML = `
+    <div class="characterScene">
+      <div class="characterGlow" aria-hidden="true"></div>
+      <div class="characterShadow" aria-hidden="true"></div>
 
-    contenedor.innerHTML = "";
+      <img
+        class="characterImage"
+        src="${Lumi.Assets.image("character.png")}"
+        alt="Personaje del tema ${themeName}"
+        decoding="async"
+      >
 
-    const rutaTema =
-        obtenerRutaTema();
-
-    const imagen =
-        document.createElement("img");
-
-    imagen.src =
-        `${rutaTema}/character.png`;
-
-    imagen.className =
-        "characterImage";
-
-    imagen.alt =
-        `Personaje del tema ${invitacion.tema.nombre}`;
-
-    manejarErrorDeRecurso(
-        imagen,
-        "character.png",
-        () => {
-
-            contenedor.hidden = true;
-
-        }
-    );
-
-    contenedor.append(imagen);
-
-}
-
-Registry.registrar(
-    "personaje",
-    {
-        elemento:"character",
-        render:crearPersonaje
-    }
-);
+      <div class="characterParticles" aria-hidden="true"></div>
+    </div>
+  `;
+});

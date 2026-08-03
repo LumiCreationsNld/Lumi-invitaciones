@@ -1,0 +1,330 @@
+/*==================================================
+    LUMI ATMOSPHERE V1.3 — VIÑETA + HALO MÁGICO
+==================================================*/
+
+#background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at center, transparent 34%, rgba(106,48,160,.08) 57%, rgba(73,25,123,.35) 84%, rgba(43,10,78,.64) 100%),
+    linear-gradient(180deg, rgba(117,50,173,.20), transparent 38%, rgba(89,32,143,.25));
+}
+
+#background::after {
+  content: "";
+  position: absolute;
+  inset: -5%;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 18%, rgba(255,255,255,.46), transparent 31%),
+    radial-gradient(ellipse at 50% 53%, rgba(255,244,252,.31), transparent 45%),
+    radial-gradient(ellipse at 50% 88%, rgba(230,209,255,.25), transparent 38%);
+  filter: blur(17px);
+}
+
+#backgroundImage { z-index: 0; }
+#backgroundOverlay { z-index: 1; }
+#particles { z-index: 3; }
+
+.lumiAtmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.lumiAtmosphere__glow {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  
+}
+
+.lumiAtmosphere__glow--header {
+  top: clamp(48px, 13cqw, 72px);
+  width: 96%;
+  height: clamp(285px, 82cqw, 410px);
+  background: radial-gradient(ellipse at center, rgba(255,255,255,.92) 0%, rgba(255,250,255,.64) 34%, rgba(255,230,248,.24) 58%, transparent 76%);
+  filter: blur(28px);
+  opacity: .94;
+}
+
+.lumiAtmosphere__glow--content {
+  top: clamp(330px, 94cqw, 455px);
+  width: 98%;
+  height: calc(100% - clamp(315px, 90cqw, 435px));
+  min-height: 440px;
+  border-radius: 42% 42% 14% 14% / 9% 9% 5% 5%;
+  background: radial-gradient(ellipse at 50% 26%, rgba(255,255,255,.78), rgba(255,249,254,.46) 47%, rgba(244,229,255,.30) 70%, transparent 90%);
+  filter: blur(25px);
+  opacity: .94;
+}
+
+#content { position: relative; z-index: 2; }
+
+#particles {
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.96) 0 1px, transparent 1.9px),
+    radial-gradient(circle, rgba(255,226,129,.94) 0 1.25px, transparent 3.5px),
+    radial-gradient(circle, rgba(231,198,255,.9) 0 1px, transparent 1.8px);
+  background-position: 0 0, 33px 48px, 58px 19px;
+  background-size: 68px 68px, 101px 101px, 87px 87px;
+  opacity: .58;
+  mix-blend-mode: screen;
+}
+
+@media (max-width: 420px) {
+  .lumiAtmosphere__glow--header { width: 100%; filter: blur(17px); }
+  .lumiAtmosphere__glow--content { width: 100%; filter: blur(21px); }
+}
+
+@media (prefers-reduced-motion: reduce) { #particles { opacity: .42; } }
+
+/*==================================================
+    LUMI CHARACTER V2.0 — ALPHA 39
+
+    Capas independientes:
+    1. Glow trasero.
+    2. Sombra de apoyo.
+    3. Imagen principal.
+    4. Partículas delanteras.
+==================================================*/
+
+#character {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.characterScene {
+  position: relative;
+  isolation: isolate;
+
+  width: 112%;
+  max-width: 440px;
+  margin-inline: -6%;
+
+  display: grid;
+  place-items: end center;
+
+  overflow: visible;
+}
+
+/*
+  Halo orgánico detrás del personaje.
+  No usa blend-mode para conservar visibilidad
+  incluso sobre las zonas claras del fondo.
+*/
+.characterGlow {
+  position: absolute;
+  left: 50%;
+  top: 7%;
+  bottom: 3%;
+  z-index: 1;
+
+  width: 76%;
+
+  transform:
+    translateX(-50%)
+    scale(.98);
+
+  border-radius:
+    48% 52% 45% 55%
+    / 42% 44% 56% 58%;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 39%,
+      rgba(255,255,255,.84) 0%,
+      rgba(255,244,252,.60) 28%,
+      rgba(230,205,255,.38) 50%,
+      rgba(255,178,224,.20) 65%,
+      transparent 81%
+    );
+
+  filter: blur(23px);
+  opacity: .94;
+  pointer-events: none;
+
+  animation:
+    lumiCharacterGlowBreath
+    8s
+    ease-in-out
+    infinite;
+}
+
+/*
+  Sombra elíptica independiente.
+  Su posición se calcula respecto a characterScene,
+  no respecto al alto completo del bloque exterior.
+*/
+.characterShadow {
+  position: absolute;
+  left: 50%;
+  bottom: 5.5%;
+  z-index: 2;
+
+  width: min(64%, 250px);
+  height: clamp(20px, 7cqw, 32px);
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(66,24,101,.46) 0%,
+      rgba(83,35,121,.34) 28%,
+      rgba(108,58,145,.18) 52%,
+      transparent 77%
+    );
+
+  filter: blur(8px);
+  opacity: .95;
+  pointer-events: none;
+}
+
+/*
+  La ilustración queda por encima del glow y la sombra.
+  El ancho ampliado permite romper ligeramente el área interior
+  y dar sensación de que sale de la escena.
+*/
+.characterImage {
+  position: relative;
+  z-index: 3;
+
+  width: 100%;
+  max-width: none;
+
+  transform:
+    translateY(-3px)
+    scale(1.025);
+
+  transform-origin: center bottom;
+
+  filter:
+    drop-shadow(0 17px 14px rgba(67,29,100,.22))
+    drop-shadow(0 0 15px rgba(255,255,255,.25));
+}
+
+/*
+  Destellos delanteros colocados lejos de los rostros.
+*/
+.characterParticles {
+  position: absolute;
+  inset: -3% -1%;
+  z-index: 4;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at 9% 34%, rgba(255,255,255,.96) 0 2.3px, transparent 4px),
+    radial-gradient(circle at 91% 27%, rgba(255,224,132,.94) 0 2.7px, transparent 4.4px),
+    radial-gradient(circle at 17% 73%, rgba(232,199,255,.94) 0 2.2px, transparent 3.9px),
+    radial-gradient(circle at 86% 68%, rgba(255,255,255,.92) 0 2.35px, transparent 4px),
+    radial-gradient(circle at 31% 13%, rgba(255,211,238,.90) 0 1.9px, transparent 3.5px),
+    radial-gradient(circle at 72% 84%, rgba(198,242,255,.90) 0 2.05px, transparent 3.7px);
+
+  background-repeat: no-repeat;
+
+  filter:
+    drop-shadow(0 0 5px rgba(255,255,255,.78));
+
+  opacity: .88;
+}
+
+/*
+  Estrella redondeada adicional para que las partículas
+  no se perciban solamente como puntos.
+*/
+.characterParticles::before,
+.characterParticles::after {
+  content: "";
+  position: absolute;
+  width: 13px;
+  aspect-ratio: 1;
+  border-radius: 42%;
+  background: #ffe49a;
+  border: 2px solid rgba(255,255,255,.94);
+  box-shadow:
+    0 0 8px rgba(255,228,154,.65),
+    0 3px 7px rgba(86,42,122,.14);
+  transform: rotate(45deg);
+}
+
+.characterParticles::before {
+  left: 14%;
+  top: 52%;
+}
+
+.characterParticles::after {
+  right: 13%;
+  top: 43%;
+  width: 10px;
+  background: #d9b9ff;
+}
+
+@keyframes lumiCharacterGlowBreath {
+  0%,
+  100% {
+    opacity: .84;
+    transform:
+      translateX(-50%)
+      scale(.97);
+  }
+
+  50% {
+    opacity: 1;
+    transform:
+      translateX(-50%)
+      scale(1.035);
+  }
+}
+
+@media (max-width: 420px) {
+  .characterScene {
+    width: 116%;
+    margin-inline: -8%;
+  }
+
+  .characterGlow {
+    top: 9%;
+    width: 78%;
+    filter: blur(19px);
+  }
+
+  .characterShadow {
+    bottom: 5%;
+    width: min(61%, 225px);
+    height: 23px;
+    filter: blur(7px);
+  }
+
+  .characterImage {
+    transform:
+      translateY(-2px)
+      scale(1.02);
+
+    filter:
+      drop-shadow(0 14px 12px rgba(67,29,100,.22))
+      drop-shadow(0 0 12px rgba(255,255,255,.23));
+  }
+
+  .characterParticles {
+    inset-inline: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .characterGlow {
+    animation: none !important;
+    opacity: .92;
+  }
+}
