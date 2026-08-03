@@ -8,7 +8,7 @@ const invitationConfig = Object.freeze({
     visibleTime: "4:00 PM",
     place: "Quinta la Esperanza",
     address: "Calle La Esperanza, Col. Unión del Recuerdo",
-    notice: "Fotografías de 4:30 a 5:00."
+    notice: "Ceremonia y Fotografías de 4:30 a 5:00.No olvides tu traje de baño"
   },
   theme: { name: "Gabby's Dollhouse", folder: "gabby" },
   intro: { title: "¡Tienes una invitación!", subtitle: "Haz clic para descubrir la sorpresa.", button: "Abrir Invitación" },
@@ -22,6 +22,7 @@ const invitationConfig = Object.freeze({
     { key: "place", title: "Lugar", icon: "📍", value: "Quinta la Esperanza" },
     { key: "address", title: "Dirección", icon: "🏠", value: "Calle La Esperanza, Col. Unión del Recuerdo" },
     { key: "notice", title: "Aviso", icon: "🎉", value: "Ceremonia y Fotografías\n4:30 a 5:00.\n\n¡¡No olvides tu traje de baño!!", featured: true }
+
   ],
   buttons: [
     { text: "Confirmar asistencia", description: "Responder por WhatsApp", icon: "💬", action: "whatsapp", color: "rosa" },
