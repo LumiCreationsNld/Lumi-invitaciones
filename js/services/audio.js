@@ -2,6 +2,7 @@ Lumi.register("Audio", {
   frame: 0,
   feedbackTimer: 0,
   sparkTimer: 0,
+  retryTimer: 0,
 
   init() {
     const button = document.getElementById("musicButton");
@@ -34,21 +35,55 @@ Lumi.register("Audio", {
     if (!audio) return false;
 
     cancelAnimationFrame(this.frame);
+    window.clearTimeout(this.retryTimer);
     audio.volume = 0;
 
-    try {
-      await audio.play();
-      this.fadeTo(invitationConfig.audio.volume);
-      this.sync();
-      return true;
-    } catch (error) {
-      console.warn(
-        "El navegador bloqueó la reproducción. Usa el botón de música para iniciarla.",
-        error
-      );
-      this.sync();
-      return false;
-    }
+    const tryPlay = async () => {
+      try {
+        await audio.play();
+        this.fadeTo(invitationConfig.audio.volume);
+        this.sync();
+        return true;
+      } catch (error) {
+        if (
+          audio.readyState <
+          HTMLMediaElement.HAVE_FUTURE_DATA
+        ) {
+          audio.load();
+
+          const retry = async () => {
+            try {
+              await audio.play();
+              this.fadeTo(invitationConfig.audio.volume);
+              this.sync();
+            } catch (_) {
+              this.sync();
+            }
+          };
+
+          audio.addEventListener(
+            "canplay",
+            retry,
+            { once: true }
+          );
+
+          this.retryTimer = window.setTimeout(
+            retry,
+            5000
+          );
+        } else {
+          console.warn(
+            "El navegador bloqueó la reproducción. Usa el botón de música para iniciarla.",
+            error
+          );
+        }
+
+        this.sync();
+        return false;
+      }
+    };
+
+    return tryPlay();
   },
 
   pause() {

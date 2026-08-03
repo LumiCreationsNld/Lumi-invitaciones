@@ -15,7 +15,7 @@ Lumi.register("Theme", {
 
     const music = document.getElementById("backgroundMusic");
     if (music) {
-      music.src = `${path}/music.mp3`;
+      music.src = `${path}/music-mobile.mp3`;
     }
   }
 });
