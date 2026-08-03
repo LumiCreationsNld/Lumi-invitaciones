@@ -8,8 +8,18 @@ Lumi.register("App", {
       Lumi.Actions.init();
       Lumi.Audio.init();
       Lumi.Magic.init();
-      await Lumi.Assets.preloadCritical();
+
+      /* La interfaz no debe esperar a la red. */
       this.bindIntro();
+
+      Lumi.Assets.preloadCritical()
+        .catch(error => {
+          console.warn(
+            "Algunos recursos continúan cargando en segundo plano.",
+            error
+          );
+        });
+
       console.info(`LUMI Invitations Framework ${Lumi.version} listo.`);
     } catch (error) {
       console.error(error);
